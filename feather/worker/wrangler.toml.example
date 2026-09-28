@@ -1,0 +1,16 @@
+name = "raven-feather-editor"
+main = "src/index.js"
+compatibility_date = "2026-09-28"
+
+[vars]
+GITHUB_OWNER = "raven-hd"
+GITHUB_REPO = "tower"
+GITHUB_BRANCH = "main"
+ARCHIVE_PATH = "feather/data/archive.json"
+UPLOAD_PATH = "feather/img/uploads"
+ALLOWED_ORIGIN = "https://YOUR-TOWER-DOMAIN.example"
+
+# Secrets are NOT written here.
+# Add them with:
+#   npx wrangler secret put GITHUB_TOKEN
+#   npx wrangler secret put EDITOR_KEY
