@@ -1252,11 +1252,6 @@ function createNextIssue() {
   showForm();
   setIssueType('weekly');
 
-  const num = _parseIssueNumber(last.issue_num);
-  document.getElementById('f-issue-num').value = num ? String(num + 1) : '1';
-  document.getElementById('f-points-total').value = last.points_total || '';
-  document.getElementById('f-position').value = last.position || '';
-
   const today = new Date();
   let start;
   let end;
@@ -1283,10 +1278,25 @@ function createNextIssue() {
     usedCurrentWeek = true;
   }
 
-  document.getElementById('f-dates').value = _fmtDM(start) + ' — ' + _fmtDM(end);
-  document.getElementById('f-season').value = _seasonForDate(start);
+  const nextSeason = _seasonForDate(start);
+  const sameSeason = String(last.season || '').trim() === nextSeason;
+  const num = _parseIssueNumber(last.issue_num);
 
-  // В новый выпуск переносим только накопительный счет и текущее место.
+  document.getElementById('f-dates').value = _fmtDM(start) + ' — ' + _fmtDM(end);
+  document.getElementById('f-season').value = nextSeason;
+
+  if (sameSeason) {
+    // Внутри одного семестра продолжаем нумерацию и накопительные данные.
+    document.getElementById('f-issue-num').value = num ? String(num + 1) : '1';
+    document.getElementById('f-points-total').value = last.points_total || '';
+    document.getElementById('f-position').value = last.position || '';
+  } else {
+    // Новый семестр начинается заново: выпуск №1, баллы с нуля.
+    document.getElementById('f-issue-num').value = '1';
+    document.getElementById('f-points-total').value = '0';
+    document.getElementById('f-position').value = '';
+  }
+
   // События, новости, новички, дни рождения и Перо начинаются пустыми.
   sections = { students:false, bd:false, quill:false };
   applySections();
@@ -1295,9 +1305,14 @@ function createNextIssue() {
   updateStatus('new');
   updateSaveButton();
   document.getElementById('f-season').focus();
-  toast(usedCurrentWeek
-    ? 'Был перерыв — поставлена текущая неделя'
-    : 'Создан следующий выпуск');
+
+  if (!sameSeason) {
+    toast('Новый семестр — выпуск №1, баллы с нуля');
+  } else {
+    toast(usedCurrentWeek
+      ? 'Был перерыв — поставлена текущая неделя'
+      : 'Создан следующий выпуск');
+  }
 }
 
 
