@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "exported": "2026-09-29T19:22:47.925Z",
+  "exported": "2026-09-29T19:30:53.708Z",
   "archive": [
     {
       "type": "weekly",
       "season": "Лето 2026",
       "dates": "27.07 - 02.08",
-      "saved_at": "2026-09-29T19:22:47.921Z",
+      "saved_at": "2026-09-29T19:30:53.702Z",
       "issue_num": "8",
       "points": "0",
       "points_total": "1339",
@@ -19,6 +19,10 @@
         {
           "name": "ГРИБ",
           "photo": "./img/uploads/2026/09/1790709760251-.jpg"
+        },
+        {
+          "name": "БАКИ",
+          "photo": "./img/uploads/2026/09/1790710243844-skin_def_2.png"
         }
       ],
       "events_list": [
