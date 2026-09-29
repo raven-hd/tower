@@ -465,6 +465,33 @@
         }
         .site-footer-copy, .site-footer-credits { font-size: 11px; color: #BA9868; }
 
+        /* ── PREVIEW ── */
+        .preview-overlay {
+            position:fixed; inset:0; z-index:1200; display:none;
+            background:rgba(4,10,18,.88); padding:18px;
+        }
+        .preview-overlay.open { display:flex; flex-direction:column; }
+        .preview-toolbar {
+            width:min(980px,100%); margin:0 auto 10px;
+            display:flex; justify-content:space-between; align-items:center; gap:12px;
+        }
+        .preview-title {
+            font-family:'Romul',serif; color:var(--gold2); font-size:12px;
+            letter-spacing:2px; text-transform:uppercase;
+        }
+        .preview-close {
+            background:transparent; border:1px solid var(--outline); color:var(--text2);
+            font-family:'SpecialElite',serif; font-size:11px; padding:6px 12px;
+            cursor:pointer; transition:all .2s;
+        }
+        .preview-close:hover { border-color:var(--gold); color:var(--gold); }
+        .preview-frame-wrap {
+            width:min(980px,100%); flex:1; min-height:0; margin:0 auto;
+            background:var(--navy); border:1px solid var(--outline);
+            box-shadow:0 12px 50px rgba(0,0,0,.55);
+        }
+        .preview-frame { width:100%; height:100%; border:0; display:block; background:#101d2e; }
+
         /* ── SCROLL BUTTONS ── */
         .scroll-btns {
             position:fixed; right:28px; bottom:36px;
@@ -710,6 +737,7 @@
           <!-- ACTIONS -->
           <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
             <button class="btn btn-primary" id="saveIssueBtn" onclick="saveIssue()">Сохранить изменения</button>
+            <button class="btn btn-secondary" onclick="previewIssue()"><i class="fas fa-eye" style="margin-right:6px"></i>Предпросмотр</button>
             <button class="btn btn-secondary" onclick="discardChanges()">Отменить изменения</button>
             <button class="btn btn-danger"   onclick="deleteIssue()" style="margin-left:auto">Удалить выпуск</button>
           </div>
@@ -734,6 +762,17 @@
       </div>
     </footer>
 
+  </div>
+</div>
+
+<!-- PREVIEW OVERLAY -->
+<div class="preview-overlay" id="previewOverlay" aria-hidden="true">
+  <div class="preview-toolbar">
+    <div class="preview-title">Предпросмотр выпуска — изменения еще не сохранены</div>
+    <button class="preview-close" type="button" onclick="closePreview()">закрыть ✕</button>
+  </div>
+  <div class="preview-frame-wrap">
+    <iframe class="preview-frame" id="previewFrame" title="Предпросмотр выпуска"></iframe>
   </div>
 </div>
 
@@ -1066,6 +1105,51 @@ function collectIssue() {
     quillVisible:    sections.quill,
   };
 }
+
+// ═══════════════════════════════════════════════
+//  PREVIEW — показывает текущие данные формы без сохранения в GitHub
+// ═══════════════════════════════════════════════
+function previewIssue() {
+  if (issueType === 'scroll') {
+    toast('Для большого новостного используется внешняя страница форума');
+    return;
+  }
+
+  const issue = collectIssue();
+  try {
+    localStorage.setItem('feather_preview_issue', JSON.stringify(issue));
+  } catch (e) {
+    console.error(e);
+    toast('Не удалось подготовить предпросмотр');
+    return;
+  }
+
+  const overlay = document.getElementById('previewOverlay');
+  const frame = document.getElementById('previewFrame');
+  if (!overlay || !frame) return;
+
+  frame.src = './index.html?preview=1&t=' + Date.now();
+  overlay.classList.add('open');
+  overlay.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+}
+
+function closePreview() {
+  const overlay = document.getElementById('previewOverlay');
+  const frame = document.getElementById('previewFrame');
+  if (overlay) {
+    overlay.classList.remove('open');
+    overlay.setAttribute('aria-hidden', 'true');
+  }
+  if (frame) frame.src = 'about:blank';
+  document.body.style.overflow = '';
+}
+
+window.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && document.getElementById('previewOverlay')?.classList.contains('open')) {
+    closePreview();
+  }
+});
 
 // ═══════════════════════════════════════════════
 //  SAVE
