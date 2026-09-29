@@ -346,7 +346,7 @@
         }
         .pol-card.has-photo .pol-photo-hint { display:none; }
         .pol-caption { position:absolute; bottom:4px; left:0; right:0; text-align:center; padding:0 5px; }
-        .pol-name-input, .pol-date-input, .pol-photo-input {
+        .pol-name-input, .pol-date-input {
             width:100%; background:transparent; border:none;
             border-bottom:1px dashed rgba(21,45,74,.2); outline:none;
             font-family:'SpecialElite',serif; text-align:center; display:block;
@@ -354,8 +354,7 @@
         }
         .pol-name-input { font-size:11px; margin-bottom:2px; }
         .pol-date-input { font-size:10px; color:#2a5280; margin-bottom:2px; }
-        .pol-photo-input { font-size:9px; color:#6a5a3a; }
-        .pol-name-input::placeholder, .pol-date-input::placeholder, .pol-photo-input::placeholder { opacity:.35; }
+        .pol-name-input::placeholder, .pol-date-input::placeholder { opacity:.35; }
         .pol-upload-btn {
             width:100%; margin-top:4px; padding:4px 5px; border:1px solid rgba(21,45,74,.22);
             background:rgba(21,45,74,.05); color:#2d3a46; cursor:pointer;
@@ -1454,10 +1453,22 @@ async function uploadPhoto(kind, index, input) {
     return;
   }
 
-  const originalText = input.previousElementSibling ? input.previousElementSibling.textContent : '';
-  if (input.previousElementSibling) {
-    input.previousElementSibling.textContent = 'загружаем…';
-    input.previousElementSibling.disabled = true;
+  // Показываем выбранную картинку сразу, не дожидаясь публикации GitHub Pages.
+  // В данные выпуска при этом попадет не локальная картинка, а путь,
+  // который вернет Worker после успешной загрузки.
+  const card = input.closest('.pol-card');
+  const img = card ? card.querySelector('.pol-photo img') : null;
+  const uploadBtn = input.previousElementSibling;
+  const previewUrl = URL.createObjectURL(file);
+  if (card && img) {
+    card.classList.add('has-photo');
+    img.onload = () => URL.revokeObjectURL(previewUrl);
+    img.src = previewUrl;
+  }
+
+  if (uploadBtn) {
+    uploadBtn.textContent = 'загружаем…';
+    uploadBtn.disabled = true;
   }
   toast('Загружаем фото…');
 
@@ -1480,15 +1491,20 @@ async function uploadPhoto(kind, index, input) {
     if (kind === 'bd' && bds[index]) bds[index].photo = result.path;
     if (kind === 'student' && students[index]) students[index].photo = result.path;
     markDirty();
-    if (kind === 'bd') renderPolaroids(); else renderStudents();
+
+    // Не перерисовываем карточку: иначе локальное превью тут же заменится
+    // адресом GitHub Pages, который может стать доступен только через несколько секунд.
+    if (uploadBtn) {
+      uploadBtn.textContent = 'заменить фото';
+      uploadBtn.disabled = false;
+    }
     toast('Фото загружено — сохраните выпуск');
   } catch (e) {
     console.error(e);
+    URL.revokeObjectURL(previewUrl);
     toast('Не удалось загрузить фото: ' + e.message);
-    if (input.previousElementSibling) {
-      input.previousElementSibling.textContent = originalText || 'выбрать фото';
-      input.previousElementSibling.disabled = false;
-    }
+    // Возвращаем карточку к предыдущему сохраненному состоянию.
+    if (kind === 'bd') renderPolaroids(); else renderStudents();
   } finally {
     input.value = '';
   }
@@ -1510,9 +1526,7 @@ function renderPolaroids() {
           oninput="bds[${i}].name=this.value; markDirty()" onblur="bds[${i}].name=this.value.trim()">
         <input class="pol-date-input" value="${esc(b.date)}" placeholder="дд.мм"
           oninput="bds[${i}].date=this.value; markDirty()" onblur="bds[${i}].date=this.value.trim()">
-        <input class="pol-photo-input" value="${esc(b.photo)}" placeholder="путь или ссылка"
-          onchange="bds[${i}].photo=this.value.trim(); markDirty(); renderPolaroids();">
-        <button type="button" class="pol-upload-btn" onclick="this.nextElementSibling.click()">выбрать фото</button>
+        <button type="button" class="pol-upload-btn" onclick="this.nextElementSibling.click()">${b.photo ? 'заменить фото' : 'выбрать фото'}</button>
         <input type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden
           onchange="uploadPhoto('bd',${i},this)">
       </div>
@@ -1543,9 +1557,7 @@ function renderStudents() {
       <div class="pol-caption">
         <input class="pol-name-input" value="${esc(s.name)}" placeholder="Имя Фамилия"
           oninput="students[${i}].name=this.value; markDirty()" onblur="students[${i}].name=this.value.trim()">
-        <input class="pol-photo-input" value="${esc(s.photo)}" placeholder="путь или ссылка"
-          onchange="students[${i}].photo=this.value.trim(); markDirty(); renderStudents();">
-        <button type="button" class="pol-upload-btn" onclick="this.nextElementSibling.click()">выбрать фото</button>
+        <button type="button" class="pol-upload-btn" onclick="this.nextElementSibling.click()">${s.photo ? 'заменить фото' : 'выбрать фото'}</button>
         <input type="file" accept="image/png,image/jpeg,image/webp,image/gif" hidden
           onchange="uploadPhoto('student',${i},this)">
       </div>
