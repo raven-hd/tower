@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "exported": "2026-09-29T19:22:16.999Z",
+  "exported": "2026-09-29T19:22:47.925Z",
   "archive": [
     {
       "type": "weekly",
       "season": "Лето 2026",
       "dates": "27.07 - 02.08",
-      "saved_at": "2026-09-29T19:22:16.996Z",
+      "saved_at": "2026-09-29T19:22:47.921Z",
       "issue_num": "8",
       "points": "0",
       "points_total": "1339",
@@ -18,7 +18,7 @@
       "students_list": [
         {
           "name": "ГРИБ",
-          "photo": "./img/uploads/2026/09/1790709712448-.jpg"
+          "photo": "./img/uploads/2026/09/1790709760251-.jpg"
         }
       ],
       "events_list": [
