@@ -1095,11 +1095,18 @@ function collectIssue() {
     quill_num:       document.getElementById('f-quill-num').value.trim(),
     quill_theme:     document.getElementById('f-quill-theme').value.trim(),
     quill_text:      document.getElementById('f-quill-text').value.trim(),
-    students_list:   JSON.parse(JSON.stringify(students)),
+    students_list:   students.map(s => ({
+      name: String(s?.name || '').trim(),
+      photo: String(s?.photo || '').trim()
+    })),
     events_list:     serializeList(lists.events),
     news_list:       serializeList(lists.news),
     arrow:           arrowUp,
-    bds:             JSON.parse(JSON.stringify(bds)),
+    bds:             bds.map(b => ({
+      name: String(b?.name || '').trim(),
+      date: String(b?.date || '').trim(),
+      photo: String(b?.photo || '').trim()
+    })),
     studentsVisible: sections.students,
     bdVisible:       sections.bd,
     quillVisible:    sections.quill,
@@ -1109,19 +1116,41 @@ function collectIssue() {
 // ═══════════════════════════════════════════════
 //  PREVIEW — показывает текущие данные формы без сохранения в GitHub
 // ═══════════════════════════════════════════════
+function buildPreviewIssue() {
+  const issue = collectIssue();
+
+  // Для только что выбранных фото используем локальный data:-preview.
+  // Он доступен мгновенно и не зависит от того, успел ли GitHub Pages
+  // опубликовать уже загруженный файл.
+  issue.students_list = (issue.students_list || []).map((s, i) => ({
+    ...s,
+    photo: students[i]?._previewData || s.photo
+  }));
+  issue.bds = (issue.bds || []).map((b, i) => ({
+    ...b,
+    photo: bds[i]?._previewData || b.photo
+  }));
+
+  return issue;
+}
+
+// Вызывается iframe предпросмотра. Оба документа находятся на одном origin.
+window.getFeatherPreviewIssue = function() {
+  return buildPreviewIssue();
+};
+
 function previewIssue() {
   if (issueType === 'scroll') {
     toast('Для большого новостного используется внешняя страница форума');
     return;
   }
 
-  const issue = collectIssue();
+  // Fallback для старого режима предпросмотра. Фото-preview сюда намеренно
+  // не кладем: большие data:-URL могут упереться в лимит localStorage.
   try {
-    localStorage.setItem('feather_preview_issue', JSON.stringify(issue));
+    localStorage.setItem('feather_preview_issue', JSON.stringify(collectIssue()));
   } catch (e) {
-    console.error(e);
-    toast('Не удалось подготовить предпросмотр');
-    return;
+    console.warn('Не удалось записать fallback предпросмотра:', e);
   }
 
   const overlay = document.getElementById('previewOverlay');
@@ -1739,6 +1768,12 @@ async function uploadPhoto(kind, index, input) {
 
   try {
     const base64 = await fileToDataUrl(file);
+
+    // Сохраняем только в памяти редактора для мгновенного предпросмотра.
+    // В archive.json это поле не попадет.
+    if (kind === 'bd' && bds[index]) bds[index]._previewData = base64;
+    if (kind === 'student' && students[index]) students[index]._previewData = base64;
+
     const response = await fetch(api + '/api/upload', {
       method: 'POST',
       headers: { 'Content-Type':'application/json', 'X-Editor-Key': key },
@@ -1767,6 +1802,8 @@ async function uploadPhoto(kind, index, input) {
   } catch (e) {
     console.error(e);
     URL.revokeObjectURL(previewUrl);
+    if (kind === 'bd' && bds[index]) delete bds[index]._previewData;
+    if (kind === 'student' && students[index]) delete students[index]._previewData;
     toast('Не удалось загрузить фото: ' + e.message);
     // Возвращаем карточку к предыдущему сохраненному состоянию.
     if (kind === 'bd') renderPolaroids(); else renderStudents();

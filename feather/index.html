@@ -1160,8 +1160,21 @@ document.addEventListener('DOMContentLoaded', () => {
   const params = new URLSearchParams(window.location.search);
   if (params.get('preview') === '1') {
     try {
-      const raw = localStorage.getItem('feather_preview_issue');
-      const issue = raw ? JSON.parse(raw) : null;
+      let issue = null;
+
+      // Предпросмотр открыт внутри редактора на том же origin:
+      // берем живые данные прямо у родительского окна, включая локальные фото.
+      if (window.parent && window.parent !== window &&
+          typeof window.parent.getFeatherPreviewIssue === 'function') {
+        issue = window.parent.getFeatherPreviewIssue();
+      }
+
+      // Fallback — на случай отдельного открытия preview-URL.
+      if (!issue) {
+        const raw = localStorage.getItem('feather_preview_issue');
+        issue = raw ? JSON.parse(raw) : null;
+      }
+
       if (!issue) throw new Error('Нет данных предпросмотра');
 
       document.body.className = 'preview-mode';
