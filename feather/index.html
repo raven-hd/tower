@@ -1675,14 +1675,26 @@ function safeListUrl(value) {
 }
 
 function listItemContent(value) {
-  // Новый формат: { text, url }. Старые строки и markdown-ссылки продолжают работать.
+  // Новый формат: { text, url, linkText }.
+  // linkText — конкретное слово/фраза внутри строки, которое должно быть ссылкой.
+  // Старые { text, url } по-прежнему делают ссылкой всю строку.
   if (value && typeof value === 'object' && !Array.isArray(value)) {
     const text = String(value.text ?? value.title ?? value.label ?? value.url ?? '');
     const url = safeListUrl(value.url ?? value.href ?? '');
-    if (url) {
-      return `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="issue-link">${esc(text || url)}</a>`;
+    const linkText = String(value.linkText ?? value.link_text ?? '').trim();
+
+    if (!url) return esc(text);
+
+    if (linkText) {
+      const at = text.indexOf(linkText);
+      if (at !== -1) {
+        const before = text.slice(0, at);
+        const after = text.slice(at + linkText.length);
+        return `${esc(before)}<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="issue-link">${esc(linkText)}</a>${esc(after)}`;
+      }
     }
-    return esc(text);
+
+    return `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="issue-link">${esc(text || url)}</a>`;
   }
   return escLinks(String(value || ''));
 }

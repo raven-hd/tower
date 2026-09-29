@@ -286,19 +286,30 @@
         .list-link-btn.has-link { opacity:1; color:var(--gold); border-color:rgba(186,152,104,.7); background:rgba(186,152,104,.08); }
         .list-link-editor {
             display:none; align-items:center; gap:7px; margin:0 35px 3px 20px;
+            flex-wrap:wrap;
         }
         .list-link-editor.open { display:flex; }
         .list-link-label {
             flex-shrink:0; font-family:'SpecialElite',serif; font-size:10px;
             letter-spacing:1px; text-transform:uppercase; color:var(--text2); opacity:.55;
         }
+        .list-link-fragment,
         .list-link-input {
             min-width:0; flex:1; background:rgba(8,24,42,.55); border:1px solid var(--outline);
             color:var(--text2); font-family:'JetBrains Mono',monospace; font-size:11px;
             padding:5px 7px; outline:none; transition:border-color .2s;
         }
+        .list-link-fragment { min-width:150px; }
+        .list-link-input { min-width:220px; }
+        .list-link-fragment:focus,
         .list-link-input:focus { border-color:var(--gold); color:var(--text); }
+        .list-link-fragment::placeholder,
         .list-link-input::placeholder { color:rgba(143,168,192,.28); }
+        .list-link-hint {
+            width:100%; padding-left:42px; margin-top:-1px;
+            font-family:'SpecialElite',serif; font-size:9px; letter-spacing:.4px;
+            color:var(--text2); opacity:.42;
+        }
         .list-link-remove {
             flex-shrink:0; border:none; background:none; color:var(--text2); opacity:.45;
             cursor:pointer; font-family:'SpecialElite',serif; font-size:10px; padding:4px 2px;
@@ -1355,15 +1366,18 @@ function normalizeListItem(value) {
   if (value && typeof value === 'object' && !Array.isArray(value)) {
     return {
       text: String(value.text ?? value.title ?? value.label ?? ''),
-      url: String(value.url ?? value.href ?? '')
+      url: String(value.url ?? value.href ?? ''),
+      linkText: String(value.linkText ?? value.link_text ?? '')
     };
   }
 
   const raw = String(value || '');
   // Если в старом архиве вся строка была оформлена как [текст](https://...),
-  // раскладываем ее на удобные отдельные поля.
+  // сохраняем ее как ссылку на всю строку.
   const m = raw.match(/^\[([^\[\]]+)\]\((https?:\/\/[^\s()]+)\)$/i);
-  return m ? { text: m[1], url: m[2] } : { text: raw, url: '' };
+  return m
+    ? { text: m[1], url: m[2], linkText: m[1] }
+    : { text: raw, url: '', linkText: '' };
 }
 
 function normalizeListUrl(value) {
@@ -1379,12 +1393,17 @@ function normalizeListUrl(value) {
 function serializeList(arr) {
   return (arr || [])
     .map(normalizeListItem)
-    .map(item => ({ text: item.text.trim(), url: normalizeListUrl(item.url) }))
+    .map(item => ({
+      text: item.text.trim(),
+      url: normalizeListUrl(item.url),
+      linkText: item.linkText.trim()
+    }))
     .filter(item => item.text || item.url)
     .map(item => {
-      // Без ссылки продолжаем хранить обычную строку: старые и новые выпуски совместимы.
       if (!item.url) return item.text;
-      return { text: item.text || item.url, url: item.url };
+      const out = { text: item.text || item.url, url: item.url };
+      if (item.linkText) out.linkText = item.linkText;
+      return out;
     });
 }
 
@@ -1406,17 +1425,23 @@ function renderList(name) {
           oninput="setListText('${name}',${i},this.value)"
           onblur="setListText('${name}',${i},this.value.trim())">
         <button class="list-link-btn${item.url ? ' has-link' : ''}" type="button"
-          onclick="toggleListLink(this)" title="${item.url ? 'изменить ссылку' : 'добавить ссылку'}">
+          onclick="toggleListLink(this,'${name}',${i})"
+          title="${item.url ? 'изменить ссылку' : 'добавить ссылку к слову или фразе'}">
           <i class="fas fa-link"></i>
         </button>
         <button class="list-row-del" type="button" onclick="delListItem('${name}',${i})" title="удалить">×</button>
       </div>
       <div class="list-link-editor">
+        <span class="list-link-label">фраза</span>
+        <input class="list-link-fragment" value="${esc(item.linkText)}" placeholder="слово или фраза"
+          oninput="setListLinkText('${name}',${i},this.value)"
+          onblur="setListLinkText('${name}',${i},this.value.trim())">
         <span class="list-link-label">ссылка</span>
         <input class="list-link-input" type="url" value="${esc(item.url)}" placeholder="https://..."
           oninput="setListUrl('${name}',${i},this.value)"
           onblur="finishListUrl('${name}',${i},this)">
         <button class="list-link-remove" type="button" onclick="clearListLink('${name}',${i})">убрать</button>
+        <div class="list-link-hint">можно сначала выделить нужные слова в строке, а потом нажать значок цепочки</div>
       </div>`;
     wrap.appendChild(box);
   });
@@ -1425,6 +1450,13 @@ function renderList(name) {
 function setListText(name, i, value) {
   const item = normalizeListItem(lists[name][i]);
   item.text = value;
+  lists[name][i] = item;
+  markDirty();
+}
+
+function setListLinkText(name, i, value) {
+  const item = normalizeListItem(lists[name][i]);
+  item.linkText = value;
   lists[name][i] = item;
   markDirty();
 }
@@ -1444,21 +1476,45 @@ function finishListUrl(name, i, input) {
   const button = input.closest('.list-row-wrap')?.querySelector('.list-link-btn');
   if (button) {
     button.classList.toggle('has-link', !!item.url);
-    button.title = item.url ? 'изменить ссылку' : 'добавить ссылку';
+    button.title = item.url ? 'изменить ссылку' : 'добавить ссылку к слову или фразе';
   }
 }
 
-function toggleListLink(button) {
-  const editor = button.closest('.list-row-wrap')?.querySelector('.list-link-editor');
+function toggleListLink(button, name, i) {
+  const wrap = button.closest('.list-row-wrap');
+  const editor = wrap?.querySelector('.list-link-editor');
   if (!editor) return;
+
   const opening = !editor.classList.contains('open');
   editor.classList.toggle('open', opening);
-  if (opening) editor.querySelector('.list-link-input')?.focus();
+
+  if (opening) {
+    const textInput = wrap.querySelector('.list-row-input');
+    if (textInput) {
+      const start = textInput.selectionStart ?? 0;
+      const end = textInput.selectionEnd ?? 0;
+      const selected = end > start ? textInput.value.slice(start, end).trim() : '';
+      if (selected) {
+        const item = normalizeListItem(lists[name][i]);
+        item.linkText = selected;
+        lists[name][i] = item;
+        const fragmentInput = editor.querySelector('.list-link-fragment');
+        if (fragmentInput) fragmentInput.value = selected;
+        markDirty();
+      }
+    }
+
+    const fragmentInput = editor.querySelector('.list-link-fragment');
+    const urlInput = editor.querySelector('.list-link-input');
+    if (fragmentInput && !fragmentInput.value) fragmentInput.focus();
+    else urlInput?.focus();
+  }
 }
 
 function clearListLink(name, i) {
   const item = normalizeListItem(lists[name][i]);
   item.url = '';
+  item.linkText = '';
   lists[name][i] = item;
   markDirty();
   renderList(name);
@@ -1466,7 +1522,7 @@ function clearListLink(name, i) {
 
 function addListItem(name) {
   if (!lists[name]) lists[name] = [];
-  lists[name].push({ text:'', url:'' });
+  lists[name].push({ text:'', url:'', linkText:'' });
   markDirty();
   renderList(name);
   const inputs = document.querySelectorAll(`#list-${name} .list-row-input`);
