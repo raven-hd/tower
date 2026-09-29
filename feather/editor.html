@@ -220,6 +220,83 @@
         }
         .section-label span { font-family:'SpecialElite',serif; font-size:11px; color:var(--text2); letter-spacing:1px; }
 
+        /* ── QUICK SECTION NAV ── */
+        .editor-quick-nav {
+            position:sticky; top:0; z-index:220;
+            display:flex; align-items:center; gap:6px; flex-wrap:wrap;
+            margin:0 0 12px; padding:8px 0 9px;
+            background:linear-gradient(to bottom, var(--navy) 78%, rgba(18,40,68,0));
+        }
+        .quick-nav-btn {
+            border:1px solid var(--outline); background:var(--navy2);
+            color:var(--text2); cursor:pointer;
+            font-family:'SpecialElite',serif; font-size:10px; letter-spacing:.7px;
+            padding:6px 9px; display:flex; align-items:center; gap:6px;
+            transition:border-color .18s,color .18s,background .18s,opacity .18s;
+        }
+        .quick-nav-btn:hover { border-color:var(--gold); color:var(--gold); }
+        .quick-nav-btn.is-off { opacity:.45; }
+        .quick-nav-count {
+            min-width:16px; height:16px; padding:0 4px;
+            border-radius:9px; display:inline-flex; align-items:center; justify-content:center;
+            background:rgba(186,152,104,.12); color:var(--gold);
+            font-family:'JetBrains Mono',monospace; font-size:8px;
+        }
+        .quick-nav-spacer { flex:1 1 10px; }
+        .quick-nav-util {
+            border-style:dashed; background:transparent; opacity:.8;
+        }
+
+        /* ── COMPACT EDITOR SECTIONS ── */
+        .editor-section {
+            scroll-margin-top:58px;
+            border:1px solid rgba(143,168,192,.16);
+            background:rgba(8,24,42,.16);
+            margin:10px 0;
+        }
+        .editor-section-head {
+            min-height:42px; padding:8px 11px;
+            display:flex; align-items:center; gap:10px;
+            border-bottom:1px solid rgba(143,168,192,.12);
+        }
+        .editor-section-title {
+            font-family:'Romul',serif; color:var(--gold);
+            font-size:14px; letter-spacing:1.8px;
+        }
+        .editor-section-tools {
+            margin-left:auto; display:flex; align-items:center; gap:7px;
+        }
+        .editor-section-collapse {
+            width:28px; height:27px; padding:0;
+            border:1px solid transparent; background:transparent;
+            color:var(--text2); cursor:pointer;
+            display:flex; align-items:center; justify-content:center;
+            transition:color .18s,border-color .18s;
+        }
+        .editor-section-collapse:hover { color:var(--gold); border-color:var(--outline); }
+        .editor-section-collapse i { transition:transform .18s; }
+        .editor-section-body { padding:12px 12px 14px; }
+        .editor-section.collapsed .editor-section-body { display:none; }
+        .editor-section.collapsed .editor-section-collapse i { transform:rotate(-90deg); }
+        .editor-section.section-disabled .editor-section-head { opacity:.62; }
+        .editor-section.section-disabled .editor-section-body { display:none; }
+        .editor-section-flash { animation:sectionFlash .65s ease; }
+        @keyframes sectionFlash {
+            0%,100% { border-color:rgba(143,168,192,.16); }
+            35% { border-color:var(--gold); }
+        }
+
+        /* save / preview stays available while moving through a long issue */
+        .editor-actions {
+            position:sticky; bottom:0; z-index:230;
+            display:flex; gap:10px; flex-wrap:wrap;
+            margin:18px -8px -2px; padding:10px 8px;
+            background:rgba(18,40,68,.96);
+            border-top:1px solid var(--outline);
+            box-shadow:0 -8px 18px rgba(6,17,30,.2);
+            backdrop-filter:blur(5px);
+        }
+
         /* ── FORM ── */
         .form-grid { display:grid; grid-template-columns:1fr 1fr 1fr; gap:14px 20px; margin-bottom:20px; }
         .form-grid-2 { display:grid; grid-template-columns:1fr 1fr; gap:14px 20px; margin-bottom:20px; }
@@ -521,6 +598,11 @@
             .form-grid { grid-template-columns:1fr 1fr; }
             .form-grid-2 { grid-template-columns:1fr; }
             .content { padding:20px 18px 36px; }
+            .editor-quick-nav { top:0; gap:5px; }
+            .quick-nav-btn { padding:5px 7px; font-size:9px; }
+            .quick-nav-spacer { display:none; }
+            .editor-section-body { padding:10px 9px 12px; }
+            .editor-actions { margin-left:-4px; margin-right:-4px; }
         }
         @media(max-width:480px) {
             .form-grid { grid-template-columns:1fr; }
@@ -628,114 +710,185 @@
 
           <div id="weekly-sections">
 
-          <!-- STUDENTS -->
-          <div class="section-toggle-row">
-            <div class="section-label" style="margin-bottom:0">Новые ученики</div>
-            <button class="toggle-chip" id="tog-students" onclick="toggleSection('students'); markDirty()">Включён</button>
-          </div>
-          <div id="sec-students">
-            <div class="polaroids-wrap" id="students-wrap">
-              <button class="pol-add-btn pol-add-btn-sm" onclick="addStudent()" title="Добавить">+</button>
-            </div>
-          </div>
+          <nav class="editor-quick-nav" id="editorQuickNav" aria-label="Быстрый переход по разделам">
+            <button class="quick-nav-btn" type="button" data-quick="students" onclick="jumpToEditorSection('students')">
+              ученики <span class="quick-nav-count" data-count="students">0</span>
+            </button>
+            <button class="quick-nav-btn" type="button" data-quick="events" onclick="jumpToEditorSection('events')">
+              события <span class="quick-nav-count" data-count="events">0</span>
+            </button>
+            <button class="quick-nav-btn" type="button" data-quick="results" onclick="jumpToEditorSection('results')">результаты</button>
+            <button class="quick-nav-btn" type="button" data-quick="news" onclick="jumpToEditorSection('news')">
+              новости <span class="quick-nav-count" data-count="news">0</span>
+            </button>
+            <button class="quick-nav-btn" type="button" data-quick="bd" onclick="jumpToEditorSection('bd')">
+              дни рождения <span class="quick-nav-count" data-count="bd">0</span>
+            </button>
+            <button class="quick-nav-btn" type="button" data-quick="quill" onclick="jumpToEditorSection('quill')">Перо</button>
+            <span class="quick-nav-spacer"></span>
+            <button class="quick-nav-btn quick-nav-util" id="toggleAllSectionsBtn" type="button" onclick="toggleAllEditorSections()">
+              свернуть все
+            </button>
+          </nav>
 
-          <hr class="section-divider">
+          <!-- STUDENTS -->
+          <section class="editor-section" id="editor-section-students" data-editor-section="students">
+            <div class="editor-section-head">
+              <div class="editor-section-title">Новые ученики</div>
+              <div class="editor-section-tools">
+                <button class="toggle-chip" id="tog-students" onclick="toggleSection('students'); markDirty()">Включен</button>
+                <button class="editor-section-collapse" type="button" onclick="toggleEditorSection('students')" title="свернуть / развернуть">
+                  <i class="fas fa-chevron-down"></i>
+                </button>
+              </div>
+            </div>
+            <div class="editor-section-body">
+              <div id="sec-students">
+                <div class="polaroids-wrap" id="students-wrap">
+                  <button class="pol-add-btn pol-add-btn-sm" onclick="addStudent()" title="Добавить">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <!-- EVENTS -->
-          <div class="section-label">События и анонсы</div>
-          <div class="list-builder" id="list-events"></div>
-          <button class="list-add-btn" onclick="addListItem('events')">+ добавить событие</button>
-
-          <hr class="section-divider">
+          <section class="editor-section" id="editor-section-events" data-editor-section="events">
+            <div class="editor-section-head">
+              <div class="editor-section-title">События и анонсы</div>
+              <div class="editor-section-tools">
+                <button class="editor-section-collapse" type="button" onclick="toggleEditorSection('events')" title="свернуть / развернуть">
+                  <i class="fas fa-chevron-down"></i>
+                </button>
+              </div>
+            </div>
+            <div class="editor-section-body">
+              <div class="list-builder" id="list-events"></div>
+              <button class="list-add-btn" onclick="addListItem('events')">+ добавить событие</button>
+            </div>
+          </section>
 
           <!-- RESULTS -->
-          <div class="section-label">Учебные результаты</div>
-          <div class="form-grid-2" style="align-items:end">
-            <div style="display:flex;flex-direction:column;gap:12px">
-              <div class="form-grid" style="grid-template-columns:1fr 1fr;gap:12px;margin-bottom:0">
-                <div class="field">
-                  <label class="field-label">Баллов за неделю</label>
-                  <input class="field-input" id="f-points" placeholder="0" type="number" min="0">
-                </div>
-                <div class="field">
-                  <label class="field-label">Всего баллов</label>
-                  <input class="field-input" id="f-points-total" placeholder="0" type="number" min="0">
-                </div>
-              </div>
-              <div class="field">
-                <label class="field-label">Комментарий</label>
-                <textarea class="field-textarea" id="f-points-note" placeholder="Примечание к результатам..." rows="2"></textarea>
+          <section class="editor-section" id="editor-section-results" data-editor-section="results">
+            <div class="editor-section-head">
+              <div class="editor-section-title">Учебные результаты</div>
+              <div class="editor-section-tools">
+                <button class="editor-section-collapse" type="button" onclick="toggleEditorSection('results')" title="свернуть / развернуть">
+                  <i class="fas fa-chevron-down"></i>
+                </button>
               </div>
             </div>
-            <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
-              <div class="field">
-                <label class="field-label">Место</label>
-                <input class="field-input field-input-num" id="f-position" placeholder="1" type="number" min="1" max="4">
-              </div>
-              <div class="field">
-                <label class="field-label">Динамика</label>
-                <div class="arrow-toggle">
-                  <button class="arrow-btn" id="arrow-up" onclick="setArrow(true); markDirty()">
-                    <i class="fas fa-angle-double-up"></i>
-                  </button>
-                  <button class="arrow-btn" id="arrow-dn" onclick="setArrow(false); markDirty()">
-                    <i class="fas fa-angle-double-down"></i>
-                  </button>
+            <div class="editor-section-body">
+              <div class="form-grid-2" style="align-items:end">
+                <div style="display:flex;flex-direction:column;gap:12px">
+                  <div class="form-grid" style="grid-template-columns:1fr 1fr;gap:12px;margin-bottom:0">
+                    <div class="field">
+                      <label class="field-label">Баллов за неделю</label>
+                      <input class="field-input" id="f-points" placeholder="0" type="number" min="0">
+                    </div>
+                    <div class="field">
+                      <label class="field-label">Всего баллов</label>
+                      <input class="field-input" id="f-points-total" placeholder="0" type="number" min="0">
+                    </div>
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Комментарий</label>
+                    <textarea class="field-textarea" id="f-points-note" placeholder="Примечание к результатам..." rows="2"></textarea>
+                  </div>
+                </div>
+                <div style="display:flex;flex-direction:column;gap:10px;align-items:flex-start">
+                  <div class="field">
+                    <label class="field-label">Место</label>
+                    <input class="field-input field-input-num" id="f-position" placeholder="1" type="number" min="1" max="4">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Динамика</label>
+                    <div class="arrow-toggle">
+                      <button class="arrow-btn" id="arrow-up" onclick="setArrow(true); markDirty()">
+                        <i class="fas fa-angle-double-up"></i>
+                      </button>
+                      <button class="arrow-btn" id="arrow-dn" onclick="setArrow(false); markDirty()">
+                        <i class="fas fa-angle-double-down"></i>
+                      </button>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <hr class="section-divider">
+          </section>
 
           <!-- NEWS -->
-          <div class="section-label">Внутренние новости</div>
-          <div class="list-builder" id="list-news"></div>
-          <button class="list-add-btn" onclick="addListItem('news')">+ добавить новость</button>
-
-          <hr class="section-divider">
+          <section class="editor-section" id="editor-section-news" data-editor-section="news">
+            <div class="editor-section-head">
+              <div class="editor-section-title">Внутренние новости</div>
+              <div class="editor-section-tools">
+                <button class="editor-section-collapse" type="button" onclick="toggleEditorSection('news')" title="свернуть / развернуть">
+                  <i class="fas fa-chevron-down"></i>
+                </button>
+              </div>
+            </div>
+            <div class="editor-section-body">
+              <div class="list-builder" id="list-news"></div>
+              <button class="list-add-btn" onclick="addListItem('news')">+ добавить новость</button>
+            </div>
+          </section>
 
           <!-- BIRTHDAYS -->
-          <div class="section-toggle-row">
-            <div class="section-label" style="margin-bottom:0">Дни рождения</div>
-            <button class="toggle-chip" id="tog-bd" onclick="toggleSection('bd'); markDirty()">Включён</button>
-          </div>
-          <div id="sec-bd">
-            <div class="polaroids-wrap" id="pol-wrap">
-              <button class="pol-add-btn" onclick="addPolaroid()" title="Добавить">+</button>
+          <section class="editor-section" id="editor-section-bd" data-editor-section="bd">
+            <div class="editor-section-head">
+              <div class="editor-section-title">Дни рождения</div>
+              <div class="editor-section-tools">
+                <button class="toggle-chip" id="tog-bd" onclick="toggleSection('bd'); markDirty()">Включен</button>
+                <button class="editor-section-collapse" type="button" onclick="toggleEditorSection('bd')" title="свернуть / развернуть">
+                  <i class="fas fa-chevron-down"></i>
+                </button>
+              </div>
             </div>
-          </div>
-
-          <hr class="section-divider">
+            <div class="editor-section-body">
+              <div id="sec-bd">
+                <div class="polaroids-wrap" id="pol-wrap">
+                  <button class="pol-add-btn" onclick="addPolaroid()" title="Добавить">+</button>
+                </div>
+              </div>
+            </div>
+          </section>
 
           <!-- QUILL -->
-          <div class="section-toggle-row">
-            <div class="section-label" style="margin-bottom:0">Перо Ровены</div>
-            <button class="toggle-chip" id="tog-quill" onclick="toggleSection('quill'); markDirty()">Включён</button>
-          </div>
-          <div id="sec-quill">
-            <div class="form-grid-2" style="margin-bottom:12px">
-              <div class="field">
-                <label class="field-label">Номер выпуска</label>
-                <input class="field-input" id="f-quill-num" placeholder="№ 5">
-              </div>
-              <div class="field">
-                <label class="field-label">Тема</label>
-                <input class="field-input" id="f-quill-theme" placeholder="О смелости и выборе">
+          <section class="editor-section" id="editor-section-quill" data-editor-section="quill">
+            <div class="editor-section-head">
+              <div class="editor-section-title">Перо Ровены</div>
+              <div class="editor-section-tools">
+                <button class="toggle-chip" id="tog-quill" onclick="toggleSection('quill'); markDirty()">Включен</button>
+                <button class="editor-section-collapse" type="button" onclick="toggleEditorSection('quill')" title="свернуть / развернуть">
+                  <i class="fas fa-chevron-down"></i>
+                </button>
               </div>
             </div>
-            <div class="field">
-              <label class="field-label">Текст</label>
-              <textarea class="field-textarea" id="f-quill-text" placeholder="Текст эссе или колонки..." rows="6"></textarea>
+            <div class="editor-section-body">
+              <div id="sec-quill">
+                <div class="form-grid-2" style="margin-bottom:12px">
+                  <div class="field">
+                    <label class="field-label">Номер выпуска</label>
+                    <input class="field-input" id="f-quill-num" placeholder="№ 5">
+                  </div>
+                  <div class="field">
+                    <label class="field-label">Тема</label>
+                    <input class="field-input" id="f-quill-theme" placeholder="О смелости и выборе">
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="field-label">Текст</label>
+                  <textarea class="field-textarea" id="f-quill-text" placeholder="Текст эссе или колонки..." rows="6"></textarea>
+                </div>
+              </div>
             </div>
-          </div>
+          </section>
 
           </div><!-- /weekly-sections -->
 
           <hr class="section-divider">
 
           <!-- ACTIONS -->
-          <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:10px">
+          <div class="editor-actions">
             <button class="btn btn-primary" id="saveIssueBtn" onclick="saveIssue()">Сохранить изменения</button>
             <button class="btn btn-secondary" onclick="previewIssue()"><i class="fas fa-eye" style="margin-right:6px"></i>Предпросмотр</button>
             <button class="btn btn-secondary" onclick="discardChanges()">Отменить изменения</button>
@@ -811,6 +964,8 @@ document.addEventListener('DOMContentLoaded', async () => {
   await loadArchive();
   renderChips();
   setupScroll();
+  applyEditorSectionCollapseState();
+  refreshQuickNav();
 
   // Любой ввод в обычные поля помечает форму как измененную.
   document.getElementById('editorArea').addEventListener('input', (e) => {
@@ -1558,6 +1713,7 @@ function renderList(name) {
       </div>`;
     wrap.appendChild(box);
   });
+  refreshQuickNav();
 }
 
 function setListText(name, i, value) {
@@ -1658,6 +1814,98 @@ function applyArrow() {
 }
 
 // ═══════════════════════════════════════════════
+//  EDITOR NAVIGATION / COLLAPSIBLE SECTIONS
+// ═══════════════════════════════════════════════
+const EDITOR_COLLAPSE_KEY = 'feather_editor_collapsed_sections';
+const EDITOR_SECTION_NAMES = ['students','events','results','news','bd','quill'];
+
+function _readCollapsedEditorSections() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(EDITOR_COLLAPSE_KEY) || '[]');
+    return new Set(Array.isArray(saved) ? saved : []);
+  } catch (e) {
+    return new Set();
+  }
+}
+
+function _saveCollapsedEditorSections() {
+  const collapsed = EDITOR_SECTION_NAMES.filter(name =>
+    document.getElementById('editor-section-' + name)?.classList.contains('collapsed')
+  );
+  try { localStorage.setItem(EDITOR_COLLAPSE_KEY, JSON.stringify(collapsed)); } catch (e) {}
+}
+
+function applyEditorSectionCollapseState() {
+  const collapsed = _readCollapsedEditorSections();
+  EDITOR_SECTION_NAMES.forEach(name => {
+    document.getElementById('editor-section-' + name)?.classList.toggle('collapsed', collapsed.has(name));
+  });
+  updateToggleAllSectionsButton();
+}
+
+function toggleEditorSection(name, forceExpanded = false) {
+  const el = document.getElementById('editor-section-' + name);
+  if (!el) return;
+  if (forceExpanded) el.classList.remove('collapsed');
+  else el.classList.toggle('collapsed');
+  _saveCollapsedEditorSections();
+  updateToggleAllSectionsButton();
+}
+
+function jumpToEditorSection(name) {
+  const el = document.getElementById('editor-section-' + name);
+  if (!el) return;
+  toggleEditorSection(name, true);
+  el.scrollIntoView({ behavior:'smooth', block:'start' });
+  el.classList.remove('editor-section-flash');
+  void el.offsetWidth;
+  el.classList.add('editor-section-flash');
+  setTimeout(() => el.classList.remove('editor-section-flash'), 700);
+}
+
+function toggleAllEditorSections() {
+  const nodes = EDITOR_SECTION_NAMES
+    .map(name => document.getElementById('editor-section-' + name))
+    .filter(Boolean);
+  const allCollapsed = nodes.length && nodes.every(el => el.classList.contains('collapsed'));
+  nodes.forEach(el => el.classList.toggle('collapsed', !allCollapsed));
+  _saveCollapsedEditorSections();
+  updateToggleAllSectionsButton();
+}
+
+function updateToggleAllSectionsButton() {
+  const btn = document.getElementById('toggleAllSectionsBtn');
+  if (!btn) return;
+  const nodes = EDITOR_SECTION_NAMES
+    .map(name => document.getElementById('editor-section-' + name))
+    .filter(Boolean);
+  const allCollapsed = nodes.length && nodes.every(el => el.classList.contains('collapsed'));
+  btn.textContent = allCollapsed ? 'развернуть все' : 'свернуть все';
+}
+
+function refreshQuickNav() {
+  const counts = {
+    students: students.length,
+    events: (lists.events || []).length,
+    news: (lists.news || []).length,
+    bd: bds.length
+  };
+  Object.entries(counts).forEach(([name, value]) => {
+    const node = document.querySelector(`[data-count="${name}"]`);
+    if (node) node.textContent = String(value);
+  });
+
+  const visible = {
+    students: sections.students !== false,
+    bd: sections.bd !== false,
+    quill: sections.quill !== false
+  };
+  Object.entries(visible).forEach(([name, on]) => {
+    document.querySelector(`[data-quick="${name}"]`)?.classList.toggle('is-off', !on);
+  });
+}
+
+// ═══════════════════════════════════════════════
 //  SECTIONS
 // ═══════════════════════════════════════════════
 function toggleSection(name) {
@@ -1670,11 +1918,16 @@ function applySections() {
   for (const [name, secId] of Object.entries(map)) {
     const sec = document.getElementById(secId);
     const btn = document.getElementById(tog[name]);
-    const on  = sections[name];
-    if (sec) sec.style.opacity = on ? '1' : '0.35';
-    if (sec) sec.style.pointerEvents = on ? '' : 'none';
-    if (btn) { btn.textContent = on ? 'Включён' : 'Отключён'; btn.className = 'toggle-chip ' + (on ? 'on' : 'off'); }
+    const wrapper = document.getElementById('editor-section-' + name);
+    const on = sections[name] !== false;
+    if (sec) sec.style.display = on ? '' : 'none';
+    if (wrapper) wrapper.classList.toggle('section-disabled', !on);
+    if (btn) {
+      btn.textContent = on ? 'Включен' : 'Отключен';
+      btn.className = 'toggle-chip ' + (on ? 'on' : 'off');
+    }
   }
+  refreshQuickNav();
 }
 
 // ═══════════════════════════════════════════════
@@ -1839,6 +2092,7 @@ function renderPolaroids() {
   addBtn.className = 'pol-add-btn'; addBtn.textContent = '+'; addBtn.title = 'Добавить';
   addBtn.onclick = addPolaroid;
   wrap.appendChild(addBtn);
+  refreshQuickNav();
 }
 
 function addPolaroid() { bds.push({ name:'', date:'', photo:'' }); markDirty(); renderPolaroids(); }
@@ -1870,6 +2124,7 @@ function renderStudents() {
   addBtn.className = 'pol-add-btn pol-add-btn-sm'; addBtn.textContent = '+'; addBtn.title = 'Добавить';
   addBtn.onclick = addStudent;
   wrap.appendChild(addBtn);
+  refreshQuickNav();
 }
 
 function addStudent() { students.push({ name:'', photo:'' }); markDirty(); renderStudents(); }
