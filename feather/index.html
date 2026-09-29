@@ -1669,10 +1669,28 @@ function buildIssueHTML(issue) {
   return html;
 }
 
+function safeListUrl(value) {
+  const url = String(value || '').trim();
+  return /^https?:\/\//i.test(url) ? url : '';
+}
+
+function listItemContent(value) {
+  // Новый формат: { text, url }. Старые строки и markdown-ссылки продолжают работать.
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    const text = String(value.text ?? value.title ?? value.label ?? value.url ?? '');
+    const url = safeListUrl(value.url ?? value.href ?? '');
+    if (url) {
+      return `<a href="${esc(url)}" target="_blank" rel="noopener noreferrer" class="issue-link">${esc(text || url)}</a>`;
+    }
+    return esc(text);
+  }
+  return escLinks(String(value || ''));
+}
+
 function listItems(arr) {
   if (!arr || !arr.length) return '';
-  return arr.map(s =>
-    `<div class="issue-list-item"><span class="issue-bullet">◆</span><span>${escLinks(s)}</span></div>`
+  return arr.map(item =>
+    `<div class="issue-list-item"><span class="issue-bullet">◆</span><span>${listItemContent(item)}</span></div>`
   ).join('');
 }
 

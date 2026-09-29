@@ -276,6 +276,34 @@
             transition:color .2s; flex-shrink:0;
         }
         .list-row-del:hover { color:#c04040; }
+        .list-row-wrap { display:flex; flex-direction:column; gap:3px; }
+        .list-link-btn {
+            width:30px; height:30px; flex-shrink:0; cursor:pointer;
+            background:transparent; border:1px solid var(--outline); color:var(--text2);
+            opacity:.55; transition:all .2s; display:flex; align-items:center; justify-content:center;
+        }
+        .list-link-btn:hover { opacity:1; color:var(--gold); border-color:var(--gold); }
+        .list-link-btn.has-link { opacity:1; color:var(--gold); border-color:rgba(186,152,104,.7); background:rgba(186,152,104,.08); }
+        .list-link-editor {
+            display:none; align-items:center; gap:7px; margin:0 35px 3px 20px;
+        }
+        .list-link-editor.open { display:flex; }
+        .list-link-label {
+            flex-shrink:0; font-family:'SpecialElite',serif; font-size:10px;
+            letter-spacing:1px; text-transform:uppercase; color:var(--text2); opacity:.55;
+        }
+        .list-link-input {
+            min-width:0; flex:1; background:rgba(8,24,42,.55); border:1px solid var(--outline);
+            color:var(--text2); font-family:'JetBrains Mono',monospace; font-size:11px;
+            padding:5px 7px; outline:none; transition:border-color .2s;
+        }
+        .list-link-input:focus { border-color:var(--gold); color:var(--text); }
+        .list-link-input::placeholder { color:rgba(143,168,192,.28); }
+        .list-link-remove {
+            flex-shrink:0; border:none; background:none; color:var(--text2); opacity:.45;
+            cursor:pointer; font-family:'SpecialElite',serif; font-size:10px; padding:4px 2px;
+        }
+        .list-link-remove:hover { opacity:1; color:#c07070; }
         .list-add-btn {
             font-family:'SpecialElite',serif; font-size:11px; letter-spacing:1px;
             color:var(--text2); opacity:.5; cursor:pointer; padding:4px 0;
@@ -936,8 +964,9 @@ function loadIssueIntoForm(issue) {
   document.getElementById('f-quill-theme').value  = issue.quill_theme  || '';
   document.getElementById('f-quill-text').value   = issue.quill_text   || '';
 
-  lists.events   = [...(issue.events_list   || [])];
-  lists.news     = [...(issue.news_list     || [])];
+  // События и новости: старые выпуски хранят строки, новые могут хранить { text, url }.
+  lists.events = (issue.events_list || []).map(normalizeListItem);
+  lists.news   = (issue.news_list   || []).map(normalizeListItem);
   renderList('events');
   renderList('news');
 
@@ -1017,8 +1046,8 @@ function collectIssue() {
     quill_theme:     document.getElementById('f-quill-theme').value.trim(),
     quill_text:      document.getElementById('f-quill-text').value.trim(),
     students_list:   JSON.parse(JSON.stringify(students)),
-    events_list:     [...lists.events],
-    news_list:       [...lists.news],
+    events_list:     serializeList(lists.events),
+    news_list:       serializeList(lists.news),
     arrow:           arrowUp,
     bds:             JSON.parse(JSON.stringify(bds)),
     studentsVisible: sections.students,
@@ -1322,26 +1351,122 @@ function createNextIssue() {
 }
 
 
+function normalizeListItem(value) {
+  if (value && typeof value === 'object' && !Array.isArray(value)) {
+    return {
+      text: String(value.text ?? value.title ?? value.label ?? ''),
+      url: String(value.url ?? value.href ?? '')
+    };
+  }
+
+  const raw = String(value || '');
+  // Если в старом архиве вся строка была оформлена как [текст](https://...),
+  // раскладываем ее на удобные отдельные поля.
+  const m = raw.match(/^\[([^\[\]]+)\]\((https?:\/\/[^\s()]+)\)$/i);
+  return m ? { text: m[1], url: m[2] } : { text: raw, url: '' };
+}
+
+function normalizeListUrl(value) {
+  let url = String(value || '').trim();
+  if (!url) return '';
+  if (/^www\./i.test(url)) url = 'https://' + url;
+  if (/^[a-z0-9.-]+\.[a-z]{2,}(?:\/|$)/i.test(url) && !/^[a-z]+:\/\//i.test(url)) {
+    url = 'https://' + url;
+  }
+  return url;
+}
+
+function serializeList(arr) {
+  return (arr || [])
+    .map(normalizeListItem)
+    .map(item => ({ text: item.text.trim(), url: normalizeListUrl(item.url) }))
+    .filter(item => item.text || item.url)
+    .map(item => {
+      // Без ссылки продолжаем хранить обычную строку: старые и новые выпуски совместимы.
+      if (!item.url) return item.text;
+      return { text: item.text || item.url, url: item.url };
+    });
+}
+
 function renderList(name) {
   const wrap = document.getElementById('list-' + name);
   if (!wrap) return;
   wrap.innerHTML = '';
-  (lists[name] || []).forEach((val, i) => {
-    const row = document.createElement('div');
-    row.className = 'list-row';
-    row.innerHTML = `
-      <span class="list-row-bullet">◆</span>
-      <input class="list-row-input" value="${esc(val)}" placeholder="..."
-        oninput="lists['${name}'][${i}]=this.value; markDirty()"
-        onblur="lists['${name}'][${i}]=this.value.trim()">
-      <button class="list-row-del" onclick="delListItem('${name}',${i})">×</button>`;
-    wrap.appendChild(row);
+
+  (lists[name] || []).forEach((value, i) => {
+    const item = normalizeListItem(value);
+    lists[name][i] = item;
+
+    const box = document.createElement('div');
+    box.className = 'list-row-wrap';
+    box.innerHTML = `
+      <div class="list-row">
+        <span class="list-row-bullet">◆</span>
+        <input class="list-row-input" value="${esc(item.text)}" placeholder="текст события или новости"
+          oninput="setListText('${name}',${i},this.value)"
+          onblur="setListText('${name}',${i},this.value.trim())">
+        <button class="list-link-btn${item.url ? ' has-link' : ''}" type="button"
+          onclick="toggleListLink(this)" title="${item.url ? 'изменить ссылку' : 'добавить ссылку'}">
+          <i class="fas fa-link"></i>
+        </button>
+        <button class="list-row-del" type="button" onclick="delListItem('${name}',${i})" title="удалить">×</button>
+      </div>
+      <div class="list-link-editor">
+        <span class="list-link-label">ссылка</span>
+        <input class="list-link-input" type="url" value="${esc(item.url)}" placeholder="https://..."
+          oninput="setListUrl('${name}',${i},this.value)"
+          onblur="finishListUrl('${name}',${i},this)">
+        <button class="list-link-remove" type="button" onclick="clearListLink('${name}',${i})">убрать</button>
+      </div>`;
+    wrap.appendChild(box);
   });
+}
+
+function setListText(name, i, value) {
+  const item = normalizeListItem(lists[name][i]);
+  item.text = value;
+  lists[name][i] = item;
+  markDirty();
+}
+
+function setListUrl(name, i, value) {
+  const item = normalizeListItem(lists[name][i]);
+  item.url = value;
+  lists[name][i] = item;
+  markDirty();
+}
+
+function finishListUrl(name, i, input) {
+  const item = normalizeListItem(lists[name][i]);
+  item.url = normalizeListUrl(input.value);
+  input.value = item.url;
+  lists[name][i] = item;
+  const button = input.closest('.list-row-wrap')?.querySelector('.list-link-btn');
+  if (button) {
+    button.classList.toggle('has-link', !!item.url);
+    button.title = item.url ? 'изменить ссылку' : 'добавить ссылку';
+  }
+}
+
+function toggleListLink(button) {
+  const editor = button.closest('.list-row-wrap')?.querySelector('.list-link-editor');
+  if (!editor) return;
+  const opening = !editor.classList.contains('open');
+  editor.classList.toggle('open', opening);
+  if (opening) editor.querySelector('.list-link-input')?.focus();
+}
+
+function clearListLink(name, i) {
+  const item = normalizeListItem(lists[name][i]);
+  item.url = '';
+  lists[name][i] = item;
+  markDirty();
+  renderList(name);
 }
 
 function addListItem(name) {
   if (!lists[name]) lists[name] = [];
-  lists[name].push('');
+  lists[name].push({ text:'', url:'' });
   markDirty();
   renderList(name);
   const inputs = document.querySelectorAll(`#list-${name} .list-row-input`);
