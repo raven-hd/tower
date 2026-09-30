@@ -1692,6 +1692,15 @@
             }
         }
 
+
+        /* Верхнее меню: прозрачно поверх баннера, непрозрачно при прокрутке. */
+        .forum-header {
+            transition: background-color .18s ease;
+        }
+        .forum-header.is-scrolled {
+            background: #15273f;
+        }
+
     </style>
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
@@ -2686,6 +2695,22 @@ function resolvePhotoSrc(v) {
   document.addEventListener('keydown', e => {
     if (e.key === 'Escape') closeMenus();
   });
+})();
+</script>
+
+
+<script>
+(function () {
+  const header = document.getElementById('forumHeader');
+  if (!header) return;
+
+  function updateForumHeaderOpacity() {
+    header.classList.toggle('is-scrolled', window.scrollY > 12);
+  }
+
+  window.addEventListener('scroll', updateForumHeaderOpacity, { passive: true });
+  window.addEventListener('load', updateForumHeaderOpacity);
+  updateForumHeaderOpacity();
 })();
 </script>
 
