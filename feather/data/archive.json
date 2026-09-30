@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "exported": "2026-09-30T19:49:42.338Z",
+  "exported": "2026-09-30T20:43:43.194Z",
   "archive": [
     {
       "type": "weekly",
       "season": "Осень 2026",
       "dates": "28.09 — 04.10",
-      "saved_at": "2026-09-30T19:49:42.336Z",
+      "saved_at": "2026-09-30T20:43:43.193Z",
       "issue_num": "1",
       "points": "",
       "points_total": "0",
@@ -28,25 +28,16 @@
       "type": "weekly",
       "season": "Лето 2026",
       "dates": "27.07 - 02.08",
-      "saved_at": "2026-09-29T22:13:10.855Z",
+      "saved_at": "2026-09-30T20:43:10.150Z",
       "issue_num": "8",
       "points": "0",
       "points_total": "1339",
-      "points_note": "Лидер факультета по баллам: Нимерия Блэкхорн [491 балл]\nТЕСТ",
+      "points_note": "Лидер факультета по баллам: Нимерия Блэкхорн [491 балл]",
       "position": "2",
       "quill_num": "",
       "quill_theme": "",
       "quill_text": "",
-      "students_list": [
-        {
-          "name": "ГРИБ",
-          "photo": "./img/uploads/2026/09/1790709760251-.jpg"
-        },
-        {
-          "name": "БАКИ",
-          "photo": "./img/uploads/2026/09/1790710243844-skin_def_2.png"
-        }
-      ],
+      "students_list": [],
       "events_list": [
         "IV ТУРНИРА ЗЕЛЬЕВАРОВ: начался второй тур",
         "КАЛЕНДАРЬ РПГ-ЗАДАНИЙ - ЛАММАС 2026",
@@ -69,7 +60,7 @@
           "photo": "blanc.png"
         }
       ],
-      "studentsVisible": true,
+      "studentsVisible": false,
       "bdVisible": true,
       "quillVisible": false
     },
