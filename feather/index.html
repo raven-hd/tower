@@ -1077,54 +1077,8 @@
             box-shadow: none;
         }
 
-        /*
-          Simplified port of the forum's #wrap frame:
-          double fine frame + the same corner-star asset.
-        */
-        body:not(.preview-mode) .outer-border {
-            position: relative;
-            isolation: isolate;
-            border: 0;
-            padding: 35px 25px 30px;
-            background-color: var(--forum-wrap-bg);
-            background-image:
-                url('https://drive.dhog.org/rave/images/rave-wrap-star.svg'),
-                url('https://drive.dhog.org/rave/images/rave-wrap-star.svg'),
-                url('https://drive.dhog.org/rave/images/rave-wrap-star.svg'),
-                url('https://drive.dhog.org/rave/images/rave-wrap-star.svg');
-            background-repeat: no-repeat;
-            background-size: 13px 13px;
-            background-position:
-                7px 7px,
-                calc(100% - 7px) 7px,
-                calc(100% - 7px) calc(100% - 7px),
-                7px calc(100% - 7px);
-        }
-
-        body:not(.preview-mode) .outer-border::before,
-        body:not(.preview-mode) .outer-border::after {
-            content: '';
-            position: absolute;
-            pointer-events: none;
-            z-index: 0;
-        }
-
-        body:not(.preview-mode) .outer-border::before {
-            inset: 5px;
-            border: 1px solid #8A6A3E;
-            border-radius: 22px;
-        }
-
-        body:not(.preview-mode) .outer-border::after {
-            inset: 0;
-            border: .8px solid #B67729;
-            border-radius: 35px;
-        }
-
-        body:not(.preview-mode) .outer-border > * {
-            position: relative;
-            z-index: 1;
-        }
+        /* Внешнюю рамку оставляем старую: она уже совпадала визуально
+           и корректно рисовала углы через border-image. */
 
         /* ── FORUM TOP MENU ── */
         .forum-header {
@@ -1232,8 +1186,16 @@
         body:not(.preview-mode) .banner {
             max-width: none;
             width: 100%;
-            height: min(33vw, 355px);
-            aspect-ratio: auto;
+            height: auto;
+            aspect-ratio: 3 / 1;
+        }
+
+        body:not(.preview-mode) .banner-bg {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            display: block;
         }
 
         body:not(.preview-mode) .banner-frame {
@@ -1297,9 +1259,6 @@
             body:not(.preview-mode) {
                 padding: 8px;
             }
-            body:not(.preview-mode) .outer-border {
-                padding: 30px 18px 24px;
-            }
             .forum-header {
                 padding: 0 8px;
                 gap: 3px;
@@ -1317,9 +1276,6 @@
         }
 
         @media (max-width: 620px) {
-            body:not(.preview-mode) .outer-border {
-                padding: 26px 12px 20px;
-            }
             .forum-brand { width:32px; flex-basis:32px; font-size:20px; }
             .forum-nav-link span { display:none; }
             .forum-nav-link { width:36px; justify-content:center; padding:0; }
@@ -1384,10 +1340,8 @@
     <!-- BANNER -->
     <div class="banner-wrapper">
       <div class="banner">
-        <img src="https://raw.githubusercontent.com/ravenclaw-tower/ravenclaw-tower.github.io/refs/heads/main/img/head.jpg"
-             alt="Архив Когтеврана" class="banner-bg" width="1010" height="315" loading="eager">
-        <img src="https://raw.githubusercontent.com/ravenclaw-tower/ravenclaw-tower.github.io/refs/heads/main/img/windows.png"
-             alt="" class="banner-overlay" width="1010" height="315" loading="eager" aria-hidden="true">
+        <img src="./hd_head_banner.png"
+             alt="Башня Когтевран" class="banner-bg" width="1080" height="360" loading="eager">
         <div class="banner-frame" aria-hidden="true"></div>
         <h1 class="banner-title">БАШНЯ КОГТЕВРАН</h1>
       </div>
