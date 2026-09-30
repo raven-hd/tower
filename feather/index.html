@@ -1289,6 +1289,86 @@
             }
         }
 
+
+        /* ==========================================================
+           FORUM SHELL v3 — geometry matched against equal-size screenshots
+           ========================================================== */
+
+        /*
+          Старый рисунок уголков сохраняем, но border-image больше не участвует
+          в размерах контента. Так рамка выглядит как раньше, а рабочая ширина
+          становится такой же, как у форума.
+        */
+        body:not(.preview-mode) .outer-border {
+            position: relative;
+            border: 0;
+            padding: 25px;
+            background: var(--navy);
+        }
+
+        body:not(.preview-mode) .outer-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 20;
+            pointer-events: none;
+            border: 40px solid transparent;
+            border-image: url('https://drive.dhog.org/rave/images/border.svg') 40 40 40 40 / 40px 40px 40px 40px stretch;
+        }
+
+        body:not(.preview-mode) .outer-border > * {
+            position: relative;
+            z-index: 1;
+        }
+
+        /*
+          На самом форуме высота баннера не выводится из пропорций картинки:
+          она задается от ширины окна. На половине экрана это как раз дает
+          ту высоту, которая видна на правом скриншоте.
+        */
+        body:not(.preview-mode) .banner {
+            width: 100%;
+            max-width: none;
+            height: min(33vw, 355px);
+            aspect-ratio: auto;
+        }
+
+        body:not(.preview-mode) .banner-bg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            object-position: center center;
+        }
+
+        /*
+          На архиве надпись получилась заметно крупнее форумной.
+          Уменьшаем верхний предел примерно с 32 до 24 px.
+        */
+        body:not(.preview-mode) .banner-title {
+            font-size: clamp(.95rem, 3vw, 1.5rem);
+            bottom: 24px;
+            letter-spacing: 1.5px;
+        }
+
+        @media (max-width: 1100px) {
+            body:not(.preview-mode) .outer-border {
+                padding: 25px;
+            }
+        }
+
+        @media (max-width: 700px) {
+            body:not(.preview-mode) .outer-border {
+                padding: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body:not(.preview-mode) .outer-border {
+                padding: 14px;
+            }
+        }
+
     </style>
     <link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" media="print" onload="this.media='all'">
