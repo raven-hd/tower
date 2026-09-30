@@ -1,29 +1,7 @@
 {
   "version": 2,
-  "exported": "2026-09-30T19:49:42.338Z",
+  "exported": "2026-09-30T20:42:32.180Z",
   "archive": [
-    {
-      "type": "weekly",
-      "season": "Осень 2026",
-      "dates": "28.09 — 04.10",
-      "saved_at": "2026-09-30T19:49:42.336Z",
-      "issue_num": "1",
-      "points": "",
-      "points_total": "0",
-      "points_note": "",
-      "position": "",
-      "quill_num": "",
-      "quill_theme": "",
-      "quill_text": "",
-      "students_list": [],
-      "events_list": [],
-      "news_list": [],
-      "arrow": true,
-      "bds": [],
-      "studentsVisible": false,
-      "bdVisible": false,
-      "quillVisible": false
-    },
     {
       "type": "weekly",
       "season": "Лето 2026",
