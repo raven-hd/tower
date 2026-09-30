@@ -209,7 +209,8 @@
             flex-wrap: wrap;
             gap: 10px;
         }
-        .semester-block.collapsed .semester-chips { display: none; }
+        .semester-block.collapsed .route-wrap { display: none; }
+        .semester-block.collapsed .semester-header { margin-bottom: 0; }
 
         /* ── CHIP ── */
         .chip {
@@ -2016,7 +2017,7 @@ function renderArchive() {
     `;
     header.addEventListener('click', () => block.classList.toggle('collapsed'));
 
-    const route = buildOwlRoute(items);
+    const route = buildOwlRoute(items, first);
     block.appendChild(header);
     block.appendChild(route);
     content.appendChild(block);
@@ -2034,7 +2035,7 @@ function renderArchive() {
  * ниже и продолжается уже справа налево, таща за собой новые письма —
  * и так далее, пока не закончатся выпуски семестра.
  */
-function buildOwlRoute(items) {
+function buildOwlRoute(items, showOwl = true) {
   const wrap = document.createElement('div');
   wrap.className = 'route-wrap';
 
@@ -2096,10 +2097,12 @@ function buildOwlRoute(items) {
     return stop;
   });
 
-  const owl = document.createElement('img');
-  owl.src = 'https://raw.githubusercontent.com/raven-hd/raven-hd.github.io/refs/heads/main/feather/owl.png';
-  owl.alt = '';
-  owl.className = 'route-owl';
+  const owl = showOwl ? document.createElement('img') : null;
+  if (owl) {
+    owl.src = 'https://raw.githubusercontent.com/raven-hd/raven-hd.github.io/refs/heads/main/feather/owl.png';
+    owl.alt = '';
+    owl.className = 'route-owl';
+  }
 
   function layout() {
     rowsWrap.innerHTML = '';
@@ -2127,13 +2130,17 @@ function buildOwlRoute(items) {
     if (current.length) rows.push(current);
     if (!rows.length) rows.push([]);
 
-    // Сова — в конце последнего ряда; если не помещается, переносится на новый ряд
-    const lastRow = rows[rows.length - 1];
-    const lastRowW = lastRow.length ? (lastRow.length - 1) * (STOP_W + GAP) + STOP_W : 0;
-    if (lastRow.length && lastRowW + GAP + OWL_W > containerW) {
-      rows.push([]);
+    // Сова есть только в самом новом семестре.
+    // Когда появляется новый сезон, из предыдущего она "улетает",
+    // оставляя там только цепочку уже доставленных писем.
+    if (owl) {
+      const lastRow = rows[rows.length - 1];
+      const lastRowW = lastRow.length ? (lastRow.length - 1) * (STOP_W + GAP) + STOP_W : 0;
+      if (lastRow.length && lastRowW + GAP + OWL_W > containerW) {
+        rows.push([]);
+      }
+      rows[rows.length - 1].push(owl);
     }
-    rows[rows.length - 1].push(owl);
 
     rows.forEach((rowItems, i) => {
       const rowEl = document.createElement('div');
@@ -2142,8 +2149,8 @@ function buildOwlRoute(items) {
       rowsWrap.appendChild(rowEl);
     });
 
-    // сова смотрит в сторону полёта: развернута на "обратных" рядах
-    owl.classList.toggle('flip', rows.length % 2 === 0);
+    // сова смотрит в сторону полета: развернута на "обратных" рядах
+    if (owl) owl.classList.toggle('flip', rows.length % 2 === 0);
 
     drawRoutePath(wrap, svg, path, owl, rowsWrap);
   }
@@ -2203,13 +2210,15 @@ function drawRoutePath(wrap, svg, path, owl, rowsWrap) {
     });
   });
 
-  const owlRect = owl.getBoundingClientRect();
-  const owlFlipped = owl.classList.contains('flip');
-  points.push({
-    x: owlRect.left - wrapRect.left + owlRect.width * (owlFlipped ? 0.58 : 0.42),
-    y: owlRect.top  - wrapRect.top  + owlRect.height * 0.55,
-    rowIdx: rowEls.length - 1
-  });
+  if (owl) {
+    const owlRect = owl.getBoundingClientRect();
+    const owlFlipped = owl.classList.contains('flip');
+    points.push({
+      x: owlRect.left - wrapRect.left + owlRect.width * (owlFlipped ? 0.58 : 0.42),
+      y: owlRect.top  - wrapRect.top  + owlRect.height * 0.55,
+      rowIdx: rowEls.length - 1
+    });
+  }
 
   if (points.length < 2) {
     path.setAttribute('d', '');
