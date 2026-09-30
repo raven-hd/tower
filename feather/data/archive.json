@@ -1,7 +1,64 @@
 {
   "version": 2,
-  "exported": "2026-09-30T20:52:15.238Z",
+  "exported": "2026-09-30T21:38:04.495Z",
   "archive": [
+    {
+      "type": "weekly",
+      "season": "Осень 2026",
+      "dates": "28.09 — 04.10",
+      "saved_at": "2026-09-30T21:38:04.487Z",
+      "issue_num": "1",
+      "points": "",
+      "points_total": "211",
+      "points_note": "",
+      "position": "4",
+      "quill_num": "",
+      "quill_theme": "",
+      "quill_text": "",
+      "students_list": [],
+      "events_list": [
+        {
+          "text": "Опубликованы списки на отчисление, нашёл в них себя - напиши домашку!",
+          "url": "https://dhog.org/viewtopic.php?p=183430#p183430",
+          "linkText": "списки на отчисление"
+        },
+        {
+          "text": "Идёт девятидневное путешествие в нумерологию, спешите познакомиться с этой загадочной наукой.",
+          "url": "https://dhog.org/viewtopic.php?t=6322",
+          "linkText": "девятидневное путешествие в нумерологию"
+        },
+        "I тур ВШТ стартовал и даже если вы не участвуете, то можете поддержать наших спортсменок на трибунах. От Когтеврана выступают:  Блейк Эллингтон, Адрианна Сноу, Эмберли Шрив-Стиверсон",
+        "1 октября стартуют и Индивидуальные Расписания - шанс для тех, кто хотел учиться, но не мог!"
+      ],
+      "news_list": [
+        {
+          "text": "Мы разминались три дня и вот 1 октября ДЕНЬ ФРУКТОКОГА, турнир начнётся сегодня, а кто не успел может сидеть на трибунах или играть вне турнира.",
+          "url": "https://raven-hd.github.io/fruitkog-battle/#",
+          "linkText": "ДЕНЬ ФРУКТОКОГА"
+        },
+        {
+          "text": "В эфире стоновящийся традиционным INCTOBER 2026 заводите свои темы и творите!",
+          "url": "https://rave.dhog.org/viewtopic.php?t=1673",
+          "linkText": "INCTOBER 2026"
+        },
+        {
+          "text": "Ведётся запись в новый АУДИО-спектакль Театра Ровены, всем желающим отписываться Grace Diamond-de-Kur",
+          "url": "https://rave.dhog.org/memberlist.php?mode=viewprofile&u=134",
+          "linkText": "Grace Diamond-de-Kur"
+        }
+      ],
+      "arrow": false,
+      "bds": [
+        {
+          "name": "Флоренс Найт",
+          "date": "04.10",
+          "photo": "./img/uploads/2026/09/1790803737510-.png"
+        }
+      ],
+      "studentsVisible": false,
+      "bdVisible": true,
+      "quillVisible": false
+    },
     {
       "type": "weekly",
       "season": "Лето 2026",
