@@ -471,7 +471,8 @@
             position: fixed;
             inset: 0;
             background: rgba(0,0,0,0.82);
-            z-index: 500;
+            /* Выше sticky-меню форума (z-index: 1020) и его dropdown (1050). */
+            z-index: 3000;
             display: none;
             align-items: flex-start;
             justify-content: center;
@@ -1471,9 +1472,9 @@
             margin: 0;
             font-family: 'Romul', serif;
             font-weight: normal;
-            font-size: clamp(.9rem, 2.6vw, 1.55rem);
+            font-size: clamp(.85rem, 2.2vw, 1.35rem);
             line-height: 1.1;
-            letter-spacing: 1px;
+            letter-spacing: 1.6px;
             color: var(--gold);
             text-shadow: 0 0 clamp(5px, 1vw, 10px) #000;
             -webkit-text-stroke: clamp(.4px, .08vw, .8px) #0f1011;
@@ -1790,7 +1791,7 @@
     <div class="site-header">
       <div class="head-banner" role="img" aria-label="Башня Когтевран"></div>
       <div class="page-description">
-        <h1>Башня Когтевран</h1>
+        <h1>Новостной архив</h1>
       </div>
     </div>
 
@@ -1809,9 +1810,6 @@
 
     <!-- CONTENT -->
     <main class="content">
-      <h2 class="page-title">Новостной архив</h2>
-      <p class="page-sub">Еженедельный информационный бюллетень факультета Когтевран</p>
-
       <!-- EMPTY STATE -->
       <div class="empty-state" id="emptyState">
         <div class="empty-title">Архив пуст</div>
@@ -2259,6 +2257,13 @@ function drawRoutePath(wrap, svg, path, owl, rowsWrap) {
 function openModal(idx) {
   currentIdx = idx;
   renderModal(idx);
+
+  // Если перед открытием выпуска было раскрыто верхнее меню — закрываем его.
+  document.querySelectorAll('.forum-dropdown.open').forEach(el => el.classList.remove('open'));
+  document.querySelectorAll('.forum-nav-toggle[aria-expanded="true"]').forEach(el => {
+    el.setAttribute('aria-expanded', 'false');
+  });
+
   document.getElementById('modalOverlay').classList.add('open');
   document.body.style.overflow = 'hidden';
 }
