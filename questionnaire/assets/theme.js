@@ -21,3 +21,8 @@ document.documentElement.style.setProperty('--question-accent',`rgb(${question.j
 function unavailable(){img.hidden=true;const frame=img.closest('.portrait');if(!frame.querySelector('.portrait-empty')){const placeholder=document.createElement('div');placeholder.className='portrait-empty';placeholder.textContent='портрет не загрузился';frame.append(placeholder);}}
 img.addEventListener('error',unavailable);if(img.complete&&img.naturalWidth===0)unavailable();
 })();
+// Replace broken external media once; bundled placeholders keep the page's hue.
+(()=>{document.querySelectorAll('img[data-fallback]').forEach(img=>{
+ function fallback(){const src=img.getAttribute('data-fallback');if(!src)return;img.removeAttribute('data-fallback');img.className='media-placeholder';img.src=src;}
+ img.addEventListener('error',fallback);if(img.complete&&img.naturalWidth===0)fallback();
+});})();

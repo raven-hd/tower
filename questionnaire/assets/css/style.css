@@ -261,3 +261,18 @@ h1{text-align:center;transform-origin:center center}
 /* Missing portraits must not keep the template image's display rule. */
 .portrait img[hidden]{display:none}
 .portrait-empty{aspect-ratio:4/5;display:grid;place-items:center;padding:15px;background:#e9e4db;color:#777;text-align:center;font:24px/1.25 Caveat}
+
+/* Optional illustrations use the same chosen hue as the other drawings. */
+.meme-slot .media-placeholder,.dreamcatcher-slot .media-placeholder{width:auto;max-width:100%;height:auto;max-height:290px;object-fit:contain;opacity:.72;filter:var(--illustration-filter,none) saturate(.38) contrast(.86)}
+.media-answer{width:100%;margin-top:12px}.dreamcatcher-slot .media-answer{font-size:25px}
+@media(max-width:600px){
+ .hero{display:grid;grid-template-columns:minmax(0,1fr) minmax(90px,32%);gap:12px;align-items:center;margin-bottom:26px}
+ .hero-text{grid-column:1;grid-row:1;width:auto;padding:8px 0}
+ .portrait-column{grid-column:2;grid-row:1;width:auto;align-self:center;margin:0;transform:rotate(3deg)}
+ .portrait{padding:6px 6px 4px}.portrait figcaption{font-size:14px;padding-top:5px}.portrait:before{width:55px;height:17px;left:18%}
+ .hero h1{padding:4px 0 0;margin-bottom:8px;transform:rotate(-3deg)}
+ .hero .given-name{font-size:clamp(38px,11vw,62px);line-height:1}
+ .hero .family-name{font-size:clamp(31px,9vw,49px);margin-top:-8px;line-height:1.15;padding:0 0 4px}
+ .hero .motto{font-size:clamp(18px,5vw,23px);line-height:1.15;margin:7px 0 0;padding:10px 0 0;transform:rotate(-3deg)}
+ .hero .motto:before{left:15%;width:70%}
+}
