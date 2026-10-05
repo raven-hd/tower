@@ -1,7 +1,61 @@
 {
   "version": 2,
-  "exported": "2026-09-30T21:42:42.982Z",
+  "exported": "2026-10-05T21:39:27.930Z",
   "archive": [
+    {
+      "type": "weekly",
+      "season": "Осень 2026",
+      "dates": "05.10 — 11.10",
+      "saved_at": "2026-10-05T21:35:59.714Z",
+      "issue_num": "10",
+      "points": "8",
+      "points_total": "219",
+      "points_note": "Лучшие студенты Факультета:\nЭлоди Вокер [117 баллов]\nЭсмеральда Гюго [30 баллов]\nМария Торнаги [14 баллов]",
+      "position": "4",
+      "quill_num": "",
+      "quill_theme": "",
+      "quill_text": "",
+      "students_list": [],
+      "events_list": [
+        {
+          "text": "День Гриффиндора",
+          "url": "https://dhog.org/viewtopic.php?t=6345",
+          "linkText": "День Гриффиндора"
+        },
+        "Распределенение: 14 октября 18:30",
+        {
+          "text": "Девятидневное путешествие в Нумерологию - приём отчётов до 9го октября",
+          "url": "https://dhog.org/viewtopic.php?t=6322",
+          "linkText": "Девятидневное путешествие в Нумирологию"
+        },
+        {
+          "text": "I Тур ВШТ: бинго участников",
+          "url": "https://dhog.org/viewtopic.php?t=6355",
+          "linkText": "бинго участников"
+        },
+        "ВШТ: Конкурс и бинго для болельщеков"
+      ],
+      "news_list": [
+        {
+          "text": "INCTOBER стартовал, творите, орлы, творите!",
+          "url": "https://rave.dhog.org/viewtopic.php?t=1673",
+          "linkText": "INCTOBER"
+        },
+        "Начинаются пробы на роли в Театре Ровены по всем вопросам писать Grace Diamond-de-Kur (dis: gracie_dk)",
+        "Совсем скоро нас ждёт новый этап инвентаризации в Чулане, не пропустите!",
+        "И так же совсем скоро некоторые из своих секретов откроет Леденцовая комната.",
+        {
+          "text": "Продолжаются Фруктовые бои - на носу второй тур турнира, но вы можете развлекаться и вне турнирной таблицы.",
+          "url": "https://raven-hd.github.io/fruitkog-battle/",
+          "linkText": "Фруктовые бои"
+        }
+      ],
+      "arrow": false,
+      "bds": [],
+      "studentsVisible": false,
+      "bdVisible": false,
+      "quillVisible": false
+    },
     {
       "type": "weekly",
       "season": "Осень 2026",
