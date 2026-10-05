@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "exported": "2026-10-05T21:39:27.930Z",
+  "exported": "2026-10-05T21:43:25.254Z",
   "archive": [
     {
       "type": "weekly",
       "season": "Осень 2026",
       "dates": "05.10 — 11.10",
-      "saved_at": "2026-10-05T21:35:59.714Z",
+      "saved_at": "2026-10-05T21:43:25.252Z",
       "issue_num": "10",
       "points": "8",
       "points_total": "219",
@@ -33,7 +33,12 @@
           "url": "https://dhog.org/viewtopic.php?t=6355",
           "linkText": "бинго участников"
         },
-        "ВШТ: Конкурс и бинго для болельщеков"
+        "ВШТ: Конкурс и бинго для болельщеков",
+        {
+          "text": "Индивидуальные расписания",
+          "url": "https://dhog.org/viewtopic.php?t=6356",
+          "linkText": "Индивидуальные расписания"
+        }
       ],
       "news_list": [
         {
