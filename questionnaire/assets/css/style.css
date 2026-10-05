@@ -1,0 +1,263 @@
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/font-0.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Caveat';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../fonts/font-1.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/font-2.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(../fonts/font-3.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Cormorant Garamond';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(../fonts/font-4.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Marck Script';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../fonts/font-5.ttf) format('truetype');
+}
+@font-face{font-family:'Great Vibes';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/GreatVibes-Regular.ttf') format('truetype')}
+
+:root{--accent:#a2a2d0;--accent-dark:color-mix(in srgb,var(--accent) 58%,#192238);--accent-light:color-mix(in srgb,var(--accent) 25%,#f5f0e7);--paper:#f4eee3;--ink:#262526;--bronze:#94734e;--hand:'Caveat',cursive;--serif:'Cormorant Garamond',Georgia,serif}
+*{box-sizing:border-box}body{margin:0;padding:28px 16px;background:#ddd7ce;color:var(--ink);font-family:var(--serif)}.page{max-width:1120px;margin:auto;position:relative;isolation:isolate;overflow:hidden;padding:50px 48px 34px;background-color:#eae3d6;background-image:repeating-linear-gradient(0deg,transparent 0 22px,#6f768f12 22px 23px),repeating-linear-gradient(90deg,transparent 0 22px,#6f768f12 22px 23px);box-shadow:0 8px 40px #332b2226}.page:before,.page:after{content:'';position:absolute;z-index:-1;background:var(--accent-dark);opacity:.8;transform:rotate(-7deg);clip-path:polygon(1% 3%,97% 0,100% 96%,76% 100%,55% 97%,20% 100%,0 95%);width:36%;height:45%;left:-13%;top:-5%}.page:after{left:auto;right:-14%;top:57%;transform:rotate(8deg);height:40%;background:var(--accent)}
+.hero{display:grid;grid-template-columns:minmax(0,1fr) 32%;gap:35px;align-items:center;margin:0 0 36px;position:relative}.hero-text{grid-column:1;grid-row:1;padding:13px 8px;min-width:0;position:relative}.hero-text:before{content:'';position:absolute;inset:-15px -10px;background:var(--paper);z-index:-1;clip-path:polygon(2% 0,98% 2%,100% 95%,78% 99%,48% 96%,3% 100%,0 8%)}.eyebrow{font:25px var(--hand);text-align:right;color:var(--accent-dark);margin:0 8px 8px}h1{font:400 clamp(45px,6.4vw,79px)/1.18 'Great Vibes',cursive;color:var(--accent-dark);margin:0 0 22px;overflow-wrap:anywhere}.motto{font:500 21px/1.35 var(--serif);margin:0;padding-top:17px;border-top:1px solid #94734e66;white-space:pre-wrap}.portrait-column{grid-column:2;grid-row:1;transform:rotate(5deg);position:relative}.portrait{padding:12px 12px 8px;background:#f6f0e5;margin:0;box-shadow:2px 5px 9px #34281c22;position:relative}.portrait:before,.paper-card:after{content:'';position:absolute;top:-9px;left:25%;width:95px;height:24px;background:#c2b29785;transform:rotate(-8deg);z-index:3;box-shadow:0 1px 2px #4737200a}.portrait img{display:block;width:100%;height:auto;aspect-ratio:4/5;object-fit:cover}.portrait figcaption{font:19px/1.15 var(--hand);text-align:center;padding:9px 0 1px;color:var(--accent-dark)}
+.collage-grid{display:grid;grid-template-columns:1fr 1fr;gap:27px 24px;align-items:start}.paper-card{position:relative;isolation:isolate;padding:27px 25px 25px;min-width:0;margin:0;box-shadow:none}.paper-card:before{content:'';position:absolute;inset:0;background:var(--paper);z-index:-1;clip-path:polygon(1% 1%,12% 0,27% 1%,43% 0,60% 1%,80% 0,99% 2%,100% 18%,99% 39%,100% 64%,99% 98%,81% 100%,62% 98%,40% 100%,20% 99%,1% 100%,0 79%,1% 55%,0 30%);filter:drop-shadow(1px 2px 1px #34281c22)}.paper-card:nth-child(3n):before{transform:rotate(-1deg)}.paper-card:nth-child(3n+1):before{transform:rotate(1deg)}.paper-card:after{left:auto;right:12%;width:66px;height:20px;opacity:.65;transform:rotate(5deg)}.prompt{font:600 28px/1.05 var(--serif);color:var(--accent-dark);margin:0 0 19px;overflow-wrap:anywhere}.prompt:before{content:'✦';font:20px Georgia,serif;color:var(--accent-dark);margin-right:8px}.answer{font:400 29px/1.25 var(--hand);margin:0;white-space:pre-wrap;overflow-wrap:anywhere}.ruled{padding-bottom:10px;border-bottom:1px solid #94734e55}.riddle{display:grid;grid-template-columns:1fr 100px;gap:12px;align-items:end}.riddle .prompt{font-size:25px}.riddle .bubble{padding:18px 15px;border:1px solid #514d49;border-radius:42% 42% 38% 40% / 25% 27% 24% 25%;position:relative;background:#faf5ec}.riddle .answer{font-size:26px}.raven img,.pupil img,.faculty-hat img{display:block;width:100%;height:auto}.raven img{transform:scaleX(-1)}.raven{margin-bottom:12px}.quiet{align-self:stretch}.questions{grid-column:1;grid-row:2 / 4}.question-scene{display:grid;grid-template-columns:1fr 1fr;gap:13px;align-items:center}.question-scene .bubble{padding:13px 12px;border:1px solid #94734e88;border-radius:22px;background:#faf6ee}.question-scene .answer{font-size:24px}.q-left{grid-column:1;grid-row:1 / 3}.q-top{grid-column:2;grid-row:1}.q-right{grid-column:2;grid-row:2}.pupil{grid-column:1 / 3;grid-row:3;width:175px;margin:-4px auto -10px}.faculty{grid-column:2;grid-row:2}.faculty-heading{display:flex;align-items:center;gap:13px;margin-bottom:10px}.faculty-heading .prompt{margin:0}.faculty-hat{width:85px;flex-shrink:0}.banner{position:relative;background:var(--accent-dark);color:#faf5e9;padding:19px 23px;clip-path:polygon(0 0,100% 0,97% 50%,100% 100%,0 100%,3% 50%);text-align:center}.banner svg{display:none}.banner .answer{font-size:32px}.meme{grid-column:2;grid-row:3 / 5}.meme-slot{border:1px solid #94734e66;min-height:260px;display:grid;place-items:center;padding:23px;background:var(--accent-light)}.meme-slot .answer{font-size:27px}.meme-slot img{width:100%;height:auto;display:block}.meme-icon{display:block;width:50px;height:40px;margin:0 auto 15px;color:var(--accent-dark)}.field{grid-column:1}.about{grid-column:2}.footer-note{font:28px var(--hand);text-align:center;margin-top:28px;color:var(--accent-dark)}
+@media(max-width:800px){.page{padding:35px 26px}.hero{gap:22px}.motto{font-size:18px}.paper-card{padding:23px 18px}.prompt{font-size:25px}.answer{font-size:27px}.riddle{grid-template-columns:1fr 78px}.riddle .answer{font-size:24px}.question-scene .answer{font-size:23px}}
+@media(max-width:600px){body{padding:10px 7px}.page{padding:29px 20px}.hero{display:flex;flex-direction:column-reverse;gap:23px;margin-bottom:32px}.portrait-column{width:190px;align-self:flex-end;margin-right:12px}.hero-text{width:100%}h1{font-size:49px;margin-bottom:17px}.motto{font-size:19px}.eyebrow{font-size:23px}.collage-grid{grid-template-columns:1fr;gap:24px}.paper-card{grid-column:auto;grid-row:auto;padding:25px 19px}.questions{order:0}.prompt{font-size:27px}.riddle{grid-template-columns:1fr 74px}.riddle .prompt{font-size:24px}.riddle .answer{font-size:25px}.question-scene{grid-template-columns:1fr}.q-left,.q-top,.q-right,.pupil{grid-column:1;grid-row:auto}.question-scene .answer{font-size:25px}.pupil{width:150px;margin:0 auto}.meme-slot{min-height:230px}.page:before{width:70%}.page:after{width:55%}}
+
+/* v02: personalized tape, crumpled color scraps, tinted illustrations */
+.portrait:before,.paper-card:after{background-color:color-mix(in srgb,var(--accent) 65%,transparent);background-image:url('../images/crumpled-paper.svg');background-size:140px;background-blend-mode:soft-light;opacity:.78}
+.page:before,.page:after{background-image:url('../images/crumpled-paper.svg');background-size:420px 420px;background-blend-mode:soft-light}
+.paper-backdrop{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.grid-scrap{position:absolute;width:34%;height:240px;opacity:.75;background-color:var(--accent-light);background-image:repeating-linear-gradient(0deg,transparent 0 17px,color-mix(in srgb,var(--accent-dark) 30%,transparent) 17px 18px),repeating-linear-gradient(90deg,transparent 0 17px,color-mix(in srgb,var(--accent-dark) 30%,transparent) 17px 18px),url('../images/crumpled-paper.svg');background-blend-mode:multiply,multiply,soft-light;clip-path:polygon(2% 0,98% 3%,100% 97%,82% 100%,59% 97%,31% 100%,0 96%);transform:rotate(-8deg)}
+.scrap-1{left:-7%;top:1%}.scrap-2{right:-8%;top:18%;transform:rotate(12deg)}.scrap-3{left:-7%;top:36%;transform:rotate(5deg)}.scrap-4{right:-6%;top:54%;transform:rotate(-9deg)}.scrap-5{left:-5%;top:74%;transform:rotate(-12deg)}.scrap-6{right:-6%;bottom:-2%;transform:rotate(7deg)}
+.raven img{transform:none}
+.raven img,.pupil img,.faculty-hat img{filter:var(--illustration-filter,none)}
+@media(max-width:600px){.grid-scrap{width:60%;height:210px}}
+
+/* v03: printed first name, handwritten family name */
+h1{margin:0 0 22px;line-height:1.05;overflow-wrap:anywhere}
+.given-name{display:block;font:600 clamp(48px,7.2vw,88px)/.98 var(--serif);color:#171717;letter-spacing:-.035em}
+.family-name{display:block;font:400 clamp(47px,6.8vw,82px)/1.2 'Great Vibes',cursive;color:var(--accent);margin-top:3px;padding:0 6px 7px 4px}
+@media(max-width:600px){.given-name{font-size:56px}.family-name{font-size:53px}}
+
+/* v04: question headings in Rubik Vinyl */
+@font-face{font-family:'Rubik Vinyl';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/RubikVinyl-Regular.ttf') format('truetype')}
+.prompt,.faculty-heading .prompt,.riddle .prompt{font-family:'Rubik Vinyl',sans-serif;font-weight:400;color:var(--accent);line-height:1.3;font-size:24px}
+.prompt:before{color:var(--accent)}
+@media(max-width:800px){.prompt,.faculty-heading .prompt,.riddle .prompt{font-size:22px}}
+@media(max-width:600px){.prompt,.faculty-heading .prompt,.riddle .prompt{font-size:23px}}
+
+/* v05: condensed printed name and question headings */
+@font-face{font-family:'Netflix Bebas Neue';font-style:normal;font-weight:400;font-display:swap;src:url('../fonts/Netflix-Bebas-Neue.ttf') format('truetype')}
+h1{transform:rotate(-5deg);transform-origin:45% 55%;padding:8px 8px 0;margin-bottom:23px;position:relative}
+.given-name{font-family:'Netflix Bebas Neue',sans-serif;font-weight:400;font-size:clamp(66px,9vw,108px);line-height:.95;letter-spacing:.01em;color:#171717}
+.family-name{position:relative;z-index:1;margin-top:-20px;padding-left:20px;font-size:clamp(54px,7vw,84px);line-height:1.15;color:var(--accent)}
+.prompt,.faculty-heading .prompt,.riddle .prompt{font-family:'Netflix Bebas Neue',sans-serif;font-weight:400;font-size:30px;line-height:1.08;letter-spacing:.025em;color:var(--accent)}
+@media(max-width:800px){.prompt,.faculty-heading .prompt,.riddle .prompt{font-size:28px}.family-name{margin-top:-15px}}
+@media(max-width:600px){h1{padding-left:2px;margin-bottom:24px}.given-name{font-size:76px}.family-name{font-size:57px;margin-top:-17px;padding-left:12px}.prompt,.faculty-heading .prompt,.riddle .prompt{font-size:29px}}
+
+/* v06: unboxed answers and softer, larger illustrations */
+.prompt:before{content:none;display:none}
+h1{text-align:center;transform-origin:center center}
+.family-name{padding-left:0;padding-right:0}
+.riddle .bubble,.question-scene .bubble{border:0;border-radius:0;background:transparent;padding:5px 0}
+.riddle{grid-template-columns:minmax(0,1fr) 135px;gap:15px}
+.riddle .answer{font-size:27px}
+.raven{margin:0 -8px 0 0}
+.raven img,.pupil img,.faculty-hat img{opacity:.72;filter:var(--illustration-filter,none) saturate(.38) contrast(.86)}
+.pupil{width:220px;margin:0 auto -12px}
+.faculty-hat{width:110px}
+.question-scene{gap:21px 18px}
+@media(max-width:800px){.riddle{grid-template-columns:minmax(0,1fr) 105px}.pupil{width:190px}.faculty-hat{width:95px}}
+@media(max-width:600px){.riddle{grid-template-columns:minmax(0,1fr) 105px;gap:12px}.pupil{width:190px}.faculty-hat{width:95px}.riddle .answer{font-size:26px}.family-name{padding-left:0}.question-scene .bubble{padding:5px 0}}
+
+/* v07: handwritten motto and centered question composition */
+.motto{font:400 28px/1.22 var(--hand);border-top:0;padding:16px 8px 0;position:relative;transform:rotate(-3deg);transform-origin:center;margin:12px 4px 8px;text-align:center}
+.motto:before{content:'';position:absolute;top:0;left:21%;width:58%;height:1px;background:color-mix(in srgb,var(--accent-dark) 55%,transparent)}
+.question-scene{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px 24px;align-items:start;text-align:center}
+.q-left{grid-column:1;grid-row:1}.q-top{grid-column:2;grid-row:1}
+.pupil{grid-column:1 / 3;grid-row:2;width:220px;margin:-2px auto -5px}
+.q-right{grid-column:1 / 3;grid-row:3;width:85%;margin:0 auto}
+.question-scene .answer{font-size:25px}
+@media(max-width:800px){.motto{font-size:26px}.question-scene{gap:16px 15px}.question-scene .answer{font-size:24px}.pupil{width:195px}}
+@media(max-width:600px){.motto{font-size:26px;padding-top:16px}.question-scene{grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:17px 15px}.q-left{grid-column:1;grid-row:1}.q-top{grid-column:2;grid-row:1}.pupil{grid-column:1 / 3;grid-row:2;width:185px}.q-right{grid-column:1 / 3;grid-row:3;width:100%}.question-scene .answer{font-size:23px}}
+
+/* v08: shadows follow torn edges; subtle additional paper layers */
+.paper-card{filter:drop-shadow(1px 3px 2px #40342620) drop-shadow(3px 7px 6px #4034260e)}
+.paper-card:before{filter:none}
+.paper-underlay{position:absolute;inset:6px -5px -6px 4px;z-index:-2;pointer-events:none;background:color-mix(in srgb,var(--accent) 17%,#e6dfd0);transform:rotate(1.2deg);clip-path:polygon(0 2%,21% 0,42% 2%,65% 0,98% 1%,100% 39%,98% 98%,72% 100%,43% 98%,1% 100%);box-shadow:none}
+.meme .paper-underlay{transform:rotate(-1.4deg);inset:5px 4px -7px -5px}
+.quiet.tinted-card:before{background-color:color-mix(in srgb,var(--accent) 22%,var(--paper))}
+.about.tinted-card:before{background-color:color-mix(in srgb,var(--accent) 12%,#e7dfce)}
+
+/* v09: varied tape positions */
+.riddle:after{top:-7px;left:9%;right:auto;width:82px;height:22px;transform:rotate(-13deg)}
+.quiet:after{top:-8px;right:5%;width:57px;height:26px;transform:rotate(16deg)}
+.questions:after{top:35%;right:auto;left:-19px;width:62px;height:23px;transform:rotate(-78deg)}
+.faculty:after{top:-10px;right:24%;width:74px;height:18px;transform:rotate(-5deg)}
+.meme:after{top:auto;bottom:8%;right:-22px;width:68px;height:25px;transform:rotate(71deg)}
+.field[aria-labelledby="talents-title"]:after{top:-7px;right:auto;left:32%;width:47px;height:21px;transform:rotate(11deg)}
+.field[aria-labelledby="learn-title"]:after{top:15%;right:-20px;width:75px;height:19px;transform:rotate(-63deg)}
+.about:after{top:-11px;right:auto;left:12%;width:92px;height:22px;transform:rotate(8deg)}
+
+/* v10: Amilia's selected robe color */
+:root{--robe:#f0f8ff}
+.portrait-column{isolation:isolate}
+.robe-paper{position:absolute;inset:-8px -12px -13px -10px;z-index:-1;background-color:var(--robe);background-image:url('../images/crumpled-paper.svg');background-size:350px;background-blend-mode:soft-light;transform:rotate(-7deg) translate(-7px,5px);clip-path:polygon(2% 1%,98% 0,100% 25%,98% 54%,100% 98%,76% 100%,48% 98%,2% 100%,0 73%,1% 42%);filter:drop-shadow(2px 3px 2px #30281c22);border:1px solid #94734e33;pointer-events:none}
+
+/* v11: second leaf, an independent asymmetric composition */
+.sheet-gap{height:45px}.sheet-two{padding-top:40px;padding-bottom:58px;min-height:850px}
+.sheet-heading{position:relative;margin:0 4px 35px;padding:18px 24px 20px;isolation:isolate;max-width:79%;transform:rotate(-2deg)}
+.sheet-heading:before{content:'';position:absolute;inset:0;z-index:-1;background:var(--paper);clip-path:polygon(0 2%,98% 0,100% 97%,76% 100%,49% 98%,1% 100%)}
+.sheet-owner{font:27px/1.1 'Great Vibes',cursive;color:var(--accent-dark);margin:0 0 11px}
+.sheet-heading h2{font:400 43px/1.05 'Netflix Bebas Neue',sans-serif;margin:0;color:#171717;letter-spacing:.02em}
+.sheet-number{position:absolute;right:18px;top:14px;font:16px var(--hand);color:var(--accent-dark);margin:0}
+.favorites-grid{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:30px 27px;align-items:start}
+.fruit-card{grid-column:1 / 8;padding:36px 33px;transform:rotate(-1deg);min-height:210px}
+.flower-card{grid-column:8 / 13;margin-top:32px;transform:rotate(2deg);min-height:180px}
+.tree-card{grid-column:1 / 5;margin-top:12px;padding-top:31px;transform:rotate(-2deg);min-height:220px}
+.guest-card{grid-column:5 / 13;transform:rotate(1deg);padding:34px 35px;min-height:230px}
+.syrups-card{grid-column:2 / 13;margin-top:12px;transform:rotate(-1deg);padding:30px 33px;min-height:190px}
+.flower-card:before{background:color-mix(in srgb,var(--accent) 16%,var(--paper))}.guest-card:before{background:color-mix(in srgb,var(--accent) 10%,#e7dfce)}
+.fruit-card:after{left:15%;right:auto;top:-9px;width:80px;transform:rotate(-12deg)}
+.flower-card:after{right:-19px;top:22%;width:60px;transform:rotate(73deg)}
+.tree-card:after{left:18%;right:auto;top:-8px;width:50px;transform:rotate(14deg)}
+.guest-card:after{right:16%;top:-9px;width:96px;transform:rotate(-7deg)}
+.syrups-card:after{left:-20px;right:auto;top:35%;width:68px;transform:rotate(-74deg)}
+.sheet-two .paper-underlay{transform:rotate(-1.3deg);background-color:color-mix(in srgb,var(--accent) 25%,#e3dacc)}
+.fruit-card .answer,.flower-card .answer,.tree-card .answer{font-size:36px;margin-top:26px}
+.sheet-two .scrap-1{top:3%;left:65%;width:40%;height:220px}.sheet-two .scrap-2{top:29%;right:30%;width:55%}.sheet-two .scrap-3{top:55%;left:-8%;width:40%}.sheet-two .scrap-4{top:64%;right:-10%}.sheet-two .scrap-5,.sheet-two .scrap-6{display:none}
+@media(max-width:800px){.favorites-grid{gap:25px 19px}.sheet-heading{max-width:90%}.sheet-heading h2{font-size:36px}.fruit-card,.guest-card,.syrups-card{padding:28px 23px}}
+@media(max-width:600px){.sheet-gap{height:25px}.sheet-two{min-height:0;padding-top:30px;padding-bottom:38px}.sheet-heading{max-width:100%;margin:0 0 27px;padding:19px 17px}.sheet-owner{font-size:25px;padding-right:44px}.sheet-heading h2{font-size:33px}.favorites-grid{grid-template-columns:1fr;gap:26px}.fruit-card,.flower-card,.tree-card,.guest-card,.syrups-card{grid-column:1;margin-top:0;min-height:0;padding:28px 21px}.fruit-card .answer,.flower-card .answer,.tree-card .answer{margin-top:15px;font-size:32px}.syrups-card{margin-left:8px}.sheet-number{font-size:14px;right:11px}}
+
+/* v12: heading printed directly on base paper and themed illustrations */
+.sheet-heading{max-width:100%;padding:12px 5px 24px;margin-bottom:24px;transform:none}
+.sheet-heading:before{content:none}
+.sheet-heading h2{font:500 clamp(39px,5.5vw,64px)/1.05 var(--serif);color:var(--accent-dark);letter-spacing:-.015em}
+.sheet-number{font:400 15px/1.2 var(--serif);right:5px;top:0;color:var(--ink)}
+.fruit-card,.flower-card,.tree-card,.syrups-card{display:grid;grid-template-columns:minmax(0,1fr) 135px;gap:15px;align-items:center}
+.illustrated-copy{min-width:0}.question-illustration{display:block;width:100%;height:auto;opacity:.72;filter:var(--illustration-filter,none) saturate(.38) contrast(.86);pointer-events:none}
+.flower-card{grid-template-columns:minmax(0,1fr) 100px}.tree-card{grid-template-columns:1fr}.tree-card .question-illustration{width:145px;margin:8px auto -5px}.syrups-card{grid-template-columns:minmax(0,1fr) 145px}
+@media(max-width:800px){.fruit-card{grid-template-columns:minmax(0,1fr) 110px}.flower-card{grid-template-columns:1fr}.flower-card .question-illustration{width:110px;margin:7px auto 0}.syrups-card{grid-template-columns:minmax(0,1fr) 110px}.sheet-heading h2{font-size:46px}}
+@media(max-width:600px){.sheet-heading{padding:14px 0 17px}.sheet-heading h2{font-size:43px}.sheet-number{right:0;top:-5px}.fruit-card,.flower-card,.tree-card,.syrups-card{grid-template-columns:minmax(0,1fr) 105px}.flower-card .question-illustration,.tree-card .question-illustration{width:100%;margin:0}}
+
+/* v13: distinct backing papers on the northern wing leaf */
+.sheet-two:before{left:auto;right:-9%;top:8%;width:34%;height:36%;transform:rotate(14deg);background-color:var(--accent-dark)}
+.sheet-two:after{right:auto;left:-11%;top:68%;width:47%;height:29%;transform:rotate(-16deg);background-color:var(--accent)}
+.sheet-two .scrap-1{left:-10%;right:auto;top:-2%;bottom:auto;width:54%;height:210px;transform:rotate(16deg)}
+.sheet-two .scrap-2{left:35%;right:auto;top:25%;bottom:auto;width:44%;height:250px;transform:rotate(-14deg)}
+.sheet-two .scrap-3{left:-12%;right:auto;top:43%;bottom:auto;width:33%;height:320px;transform:rotate(12deg)}
+.sheet-two .scrap-4{left:auto;right:-5%;top:59%;bottom:auto;width:48%;height:220px;transform:rotate(18deg)}
+.sheet-two .scrap-5{display:block;left:28%;right:auto;top:auto;bottom:-6%;width:45%;height:190px;transform:rotate(-9deg)}
+.sheet-two .scrap-6{display:none}
+.guest-card{display:grid;grid-template-columns:minmax(0,1fr) 135px;gap:18px;align-items:center}
+@media(max-width:600px){.guest-card{grid-template-columns:minmax(0,1fr) 105px;gap:12px}.sheet-two .scrap-1{width:72%;height:190px}.sheet-two .scrap-2{left:39%;width:67%;top:22%}.sheet-two .scrap-3{width:54%;top:46%;height:270px}.sheet-two .scrap-4{width:70%;top:66%}.sheet-two .scrap-5{left:14%;width:76%}}
+
+/* v14: northern wing heading matches question typography */
+.sheet-heading h2{font-family:'Netflix Bebas Neue',sans-serif;font-weight:400;color:var(--accent-dark);letter-spacing:.02em}
+.sheet-number{font:400 21px/1.1 'Netflix Bebas Neue',sans-serif;color:var(--accent-dark);letter-spacing:.025em}
+
+/* v15: northern and western wings share a leaf; southern wing stands alone */
+.west-wing{margin-top:48px}.wing-heading{margin:0 5px 27px;transform:rotate(-1deg)}.wing-heading h2{font:400 clamp(39px,5.5vw,64px)/1.05 'Netflix Bebas Neue',sans-serif;color:var(--accent-dark);letter-spacing:.02em;margin:0}
+.west-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:28px 24px;align-items:start}.west-33{grid-column:1/3;transform:rotate(2deg)}.west-34{grid-column:3/7;transform:rotate(-1deg)}.west-35{grid-column:1/4;transform:rotate(-2deg)}.west-36{grid-column:4/7;transform:rotate(1.5deg)}.west-37{grid-column:2/7;transform:rotate(-1deg)}
+.west-33:before,.west-36:before{background:color-mix(in srgb,var(--accent) 14%,var(--paper))}.west-34:after{left:20%;right:auto;transform:rotate(-16deg);width:85px}.west-35:after{top:30%;left:-21px;right:auto;transform:rotate(-70deg)}.west-37:after{right:7%;transform:rotate(13deg);width:53px}
+.sheet-two .scrap-4{top:62%}.sheet-two .scrap-5{bottom:2%;height:260px}.sheet-two .scrap-6{display:block;left:-9%;right:auto;top:79%;bottom:auto;width:38%;height:260px;transform:rotate(14deg)}
+.sheet-three{padding-top:40px;padding-bottom:55px}.south-grid{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:30px 25px;align-items:start}.south-grid .wing-card{grid-column:span 3}.south-19,.south-22,.south-23,.south-30{grid-column:span 4!important}.south-20,.south-21,.south-24,.south-31{grid-column:span 2!important}.south-grid .wing-card:nth-child(3n+1){transform:rotate(-1deg)}.south-grid .wing-card:nth-child(3n+2){transform:rotate(1.4deg)}.south-grid .wing-card:nth-child(4n):before{background:color-mix(in srgb,var(--accent) 12%,var(--paper))}.south-grid .wing-card:nth-child(even):after{right:24%;width:57px;transform:rotate(-13deg)}.south-grid .wing-card:nth-child(3n):after{right:-17px;top:26%;width:60px;transform:rotate(73deg)}
+.sheet-three:before{left:-8%;top:22%;height:30%;width:33%;transform:rotate(12deg)}.sheet-three:after{right:-13%;top:73%;height:24%;width:47%;transform:rotate(-10deg)}.sheet-three .scrap-1{left:62%;top:-2%;transform:rotate(-14deg);width:45%}.sheet-three .scrap-2{right:-9%;top:23%;transform:rotate(8deg)}.sheet-three .scrap-3{left:18%;top:41%;width:54%;transform:rotate(-12deg)}.sheet-three .scrap-4{right:-10%;top:61%;transform:rotate(17deg)}.sheet-three .scrap-5{left:-8%;top:82%;transform:rotate(8deg)}.sheet-three .scrap-6{right:24%;bottom:-3%;transform:rotate(-16deg)}
+@media(max-width:600px){.west-wing{margin-top:35px}.wing-heading h2{font-size:43px}.west-grid,.south-grid{grid-template-columns:1fr;gap:26px}.west-grid .wing-card,.south-grid .wing-card{grid-column:1!important}.sheet-three{padding-top:30px}.south-grid .wing-card{padding:25px 21px}}
+
+/* v16: independent paper stacks instead of aligned rows */
+.favorites-grid,.west-grid,.south-grid{display:block;columns:2;column-gap:32px}
+.favorites-grid>.paper-card,.west-grid>.paper-card,.south-grid>.paper-card{display:inline-block;vertical-align:top;break-inside:avoid;page-break-inside:avoid;width:calc(100% - 10px);margin:5px 3px 29px;min-height:0;grid-column:auto!important}
+.favorites-grid>.flower-card,.west-grid>.west-34,.south-grid>.paper-card:nth-child(3n+2){width:calc(100% - 28px);margin-left:20px;margin-top:17px}
+.favorites-grid>.guest-card,.west-grid>.west-36,.south-grid>.paper-card:nth-child(4n){width:calc(100% - 20px);margin-left:2px;margin-top:12px}
+.favorites-grid .question-illustration{float:right;width:135px;margin:4px -4px 7px 14px}.favorites-grid>.tree-card .question-illustration{float:none;display:block;width:160px;margin:10px auto 0}.favorites-grid>.paper-card:has(.question-illustration)::before{clear:both}
+.favorites-grid>.paper-card:has(.question-illustration)::after{z-index:3}.favorites-grid>.paper-card:has(.question-illustration){display:inline-block}.favorites-grid .illustrated-copy{display:block}
+.west-33 .question-illustration,.south-19 .question-illustration,.south-25 .question-illustration{width:175px;max-width:55%;margin:9px auto -6px}
+.west-33 .answer{font-size:35px}.south-grid>.paper-card{padding:28px 27px}.south-grid>.paper-card:nth-child(5n){margin-bottom:42px}
+@media(max-width:600px){.favorites-grid,.west-grid,.south-grid{columns:1;column-gap:0}.favorites-grid>.paper-card,.west-grid>.paper-card,.south-grid>.paper-card{width:calc(100% - 8px);margin:5px 3px 25px}.favorites-grid>.flower-card,.west-grid>.west-34,.south-grid>.paper-card:nth-child(3n+2){width:calc(100% - 18px);margin-left:13px;margin-top:10px}.favorites-grid .question-illustration{width:105px;margin-left:10px}.south-grid>.paper-card{padding:25px 21px}}
+
+/* v17: unequal-width, staggered packing rather than two aligned stacks */
+.packed-grid{display:block!important;position:relative;columns:auto!important;overflow:visible}
+.packed-grid>.paper-card{margin:0!important;min-height:0;grid-column:auto!important;grid-row:auto!important;display:block;box-sizing:border-box}
+.packed-grid>.paper-card:nth-child(4n+1){transform:rotate(-1.5deg)}.packed-grid>.paper-card:nth-child(4n+2){transform:rotate(1.8deg)}.packed-grid>.paper-card:nth-child(4n+3){transform:rotate(-.7deg)}.packed-grid>.paper-card:nth-child(4n){transform:rotate(1deg)}
+.packed-grid>.riddle{display:grid;grid-template-columns:minmax(0,1fr) 125px}.packed-grid>.faculty .faculty-heading{display:flex}
+.favorites-grid .illustrated-copy:after,.west-grid .illustrated-copy:after,.south-grid .illustrated-copy:after{content:'';display:table;clear:both}
+.favorites-grid .flow-illustration,.west-grid .flow-illustration,.south-grid .flow-illustration{float:right!important;display:block;width:43%!important;max-width:175px!important;height:auto;margin:2px -8px 9px 12px!important;shape-outside:var(--shape);shape-image-threshold:.12;shape-margin:12px}
+.fruit-card .flow-illustration{--shape:url('../images/fruit.png')}.flower-card .flow-illustration{--shape:url('../images/flower.png')}.tree-card .flow-illustration{--shape:url('../images/branch.png')}.guest-card .flow-illustration{--shape:url('../images/door.png')}.syrups-card .flow-illustration{--shape:url('../images/syrup.png')}.west-33 .flow-illustration{--shape:url('../images/tea.png')}.south-19 .flow-illustration{--shape:url('../images/quidditch.png')}.south-25 .flow-illustration{--shape:url('../images/book.png')}
+.flower-card .flow-illustration,.south-25 .flow-illustration{float:left!important;margin:3px 12px 8px -7px!important}
+.favorites-grid .prompt,.west-grid .prompt,.south-grid .prompt{overflow-wrap:break-word}
+@media(max-width:650px){.collage-grid{display:block}.collage-grid>.paper-card{margin:0 0 28px!important}.favorites-grid,.west-grid,.south-grid{columns:1}.favorites-grid>.paper-card,.west-grid>.paper-card,.south-grid>.paper-card{position:relative!important;width:calc(100% - 8px)!important;margin:5px 3px 26px!important}.favorites-grid .flow-illustration,.west-grid .flow-illustration,.south-grid .flow-illustration{max-width:135px!important;width:40%!important}.questions .question-scene{display:grid}}
+
+/* v19: final leaf and selected tilted / overlapping paper edges */
+.sheet-four{padding-top:40px;padding-bottom:48px}.final-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}.final-grid .paper-card{padding:25px 27px}.final-39:before,.final-43:before{background:color-mix(in srgb,var(--accent) 12%,var(--paper))}.final-45:before{background:color-mix(in srgb,var(--accent) 17%,var(--paper))}.final-45 .answer{font-size:31px}.final-40:after{top:27%;right:-16px;transform:rotate(71deg);width:55px}.final-42:after{left:12%;right:auto;transform:rotate(-15deg);width:83px}
+.packed-grid>.paper-card:nth-child(n){transform:none}
+.packed-grid>.paper-card:nth-child(5n+1){transform:rotate(-1.5deg)}
+.packed-grid>.paper-card:nth-child(5n+3){transform:rotate(1.3deg)}
+/* Only blank paper margins extend beneath a neighboring card. */
+.packed-grid>.paper-card:nth-child(4n+2):before{right:-18px;bottom:-10px;transform:rotate(.7deg)}
+.packed-grid>.paper-card:nth-child(4n+3) .paper-underlay{right:-16px;bottom:-8px;transform:rotate(-2deg)}
+.sheet-four:before{left:auto;right:-12%;top:-6%;height:36%;width:43%;transform:rotate(-14deg)}.sheet-four:after{left:-9%;right:auto;top:57%;height:36%;width:37%;transform:rotate(11deg)}
+.sheet-four .scrap-1{left:-9%;top:7%;width:42%;transform:rotate(14deg)}.sheet-four .scrap-2{right:-11%;top:31%;width:38%;transform:rotate(-13deg)}.sheet-four .scrap-3{left:23%;top:49%;width:53%;transform:rotate(9deg)}.sheet-four .scrap-4{right:-7%;top:74%;width:43%;transform:rotate(-9deg)}.sheet-four .scrap-5{left:-8%;top:auto;bottom:-3%;width:47%;transform:rotate(-15deg)}.sheet-four .scrap-6{display:none}
+@media(max-width:650px){.final-grid{display:block}.final-grid>.paper-card{width:calc(100% - 8px);margin:5px 3px 26px}.final-grid .paper-card{padding:25px 21px}.sheet-four{padding-top:30px}.packed-grid>.paper-card:nth-child(4n+2):before{right:-5px;bottom:-5px}}
+
+/* v20: administrative section begins with the museum question */
+.admin-wing{margin-top:35px}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}.admin-grid .paper-card{padding:25px 27px}@media(max-width:650px){.admin-wing{margin-top:28px}.admin-grid{display:block}.admin-grid>.paper-card{width:calc(100% - 8px);margin:5px 3px 26px}.admin-grid .paper-card{padding:25px 21px}}
+
+/* v21: candy, theatre and music contour illustrations */
+.west-35 .flow-illustration{--shape:url('../images/lollipop.png');max-width:135px!important;width:36%!important}.south-30 .flow-illustration{--shape:url('../images/theatre.png');max-width:155px!important;width:39%!important}.south-23 .flow-illustration{--shape:url('../images/notes.png');float:left!important;margin:2px 12px 8px -5px!important}
+
+/* v22: smaller northern illustrations, image slot and wider theatre card */
+.favorites-grid .flow-illustration{width:32%!important;max-width:110px!important;margin:2px -3px 7px 10px!important;shape-margin:9px}
+.south-23 .flow-illustration{float:right!important;margin:2px -6px 8px 12px!important}
+.south-30 .flow-illustration{width:24%!important;max-width:135px!important}
+.dreamcatcher-slot{min-height:230px;border:1px solid #94734e66;background:color-mix(in srgb,var(--accent-light) 50%,var(--paper));display:grid;place-items:center;padding:16px}.dreamcatcher-placeholder{font:400 23px/1.25 var(--hand);color:var(--accent-dark);text-align:center;margin:0}.dreamcatcher-image{display:block;width:100%;height:auto}.dreamcatcher-image[hidden]{display:none}
+@media(max-width:650px){.favorites-grid .flow-illustration{width:30%!important;max-width:95px!important}.dreamcatcher-slot{min-height:210px}}
+
+/* v23: intentional positions and lower northern illustrations */
+.flower-card .flow-illustration{float:right!important;margin:9px -3px -3px 12px!important}
+.tree-card .flow-illustration{margin-top:25px!important}
+.collage-grid.packed-grid .meme{display:flex;flex-direction:column}.collage-grid.packed-grid .meme-slot{flex:1;min-height:330px}
+
+/* v24: shorter meme space, full-width about card */
+.collage-grid.packed-grid .meme-slot{min-height:260px}.collage-grid.packed-grid .about{padding:25px 30px}.collage-grid.packed-grid .about .answer{max-width:none}@media(max-width:650px){.collage-grid .meme-slot{min-height:230px}}
+
+/* v25: first-leaf adjustments from annotated reference */
+.collage-grid.packed-grid .meme-slot{min-height:300px}.collage-grid.packed-grid>.about{min-height:190px;padding:30px 30px 34px}.collage-grid.packed-grid>.about .answer{margin-top:8px}
+
+/* Question ink is derived separately from the decorative paper color. */
+.prompt,.faculty-heading .prompt,.riddle .prompt{color:var(--question-accent,var(--accent-dark))}
+
+/* Decorative colors remain independent of question ink. */
+.page:before,.page:after,.sheet-two:before,.sheet-two:after{background-color:var(--accent);opacity:1;filter:drop-shadow(1px 3px 3px #40342624)}
+.grid-scrap{background-color:var(--accent);opacity:.9;filter:drop-shadow(1px 3px 2px #40342622)}
+.family-name{color:var(--accent);text-shadow:var(--family-shadow,none)}
+
+/* Missing portraits must not keep the template image's display rule. */
+.portrait img[hidden]{display:none}
+.portrait-empty{aspect-ratio:4/5;display:grid;place-items:center;padding:15px;background:#e9e4db;color:#777;text-align:center;font:24px/1.25 Caveat}
