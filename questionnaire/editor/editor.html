@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-<html lang="ru">
- <head>
-  <meta charset="utf-8"/>
-  <meta content="width=device-width,initial-scale=1" name="viewport"/>
+<!doctype html>
+<html lang="ru"><head>
+  <meta charset="utf-8">
+  <meta content="width=device-width,initial-scale=1" name="viewport">
   <title>
    редактор анкет
   </title>
-  <link href="editor-assets/editor.css" rel="stylesheet"/>
-  <link href="../favicon.svg" rel="icon" type="image/svg+xml"/>
+  <link href="editor-assets/editor.css" rel="stylesheet">
+  <link href="../favicon.svg" rel="icon" type="image/svg+xml">
  </head>
  <body>
   <main>
@@ -22,12 +21,12 @@
       </button>
       <label class="upload">
        загрузить Excel
-       <input accept=".xlsx,.xls,.csv" hidden="" id="excel" type="file"/>
+       <input accept=".xlsx,.xls,.csv" hidden="" id="excel" type="file">
       </label>
      </div>
      <label class="file-label project-open">
       открыть сохраненный проект
-      <input accept=".json" id="draft" type="file"/>
+      <input accept=".json" id="draft" type="file">
      </label>
      <label>
       ученик
@@ -46,11 +45,11 @@
       <div class="two">
        <label>
         имя
-        <input id="given"/>
+        <input id="given">
        </label>
        <label>
         фамилия
-        <input id="family"/>
+        <input id="family">
        </label>
       </div>
       <label>
@@ -60,11 +59,11 @@
       <div class="two">
        <label>
         цвет страницы
-        <input id="accent" type="color"/>
+        <input id="accent" type="color">
        </label>
        <label>
         цвет мантии
-        <input id="robe" type="color"/>
+        <input id="robe" type="color">
        </label>
       </div>
       <label>
@@ -83,43 +82,27 @@
       <summary>
        изображения
       </summary>
-      <p class="hint">
-       загрузите файл, чтобы картинка хранилась на нашем сайте. для ссылки нужен адрес самого изображения, а не страницы с ним.
-      </p>
-      <label>
-       портрет
-       <input id="portrait-url" placeholder="ссылка на изображение" type="url"/>
-      </label>
-      <label class="file-label">
-       или файл портрета
-       <input accept="image/png,image/jpeg,image/webp,image/gif" data-image="portrait" type="file"/>
-      </label>
-      <label>
-       мем · ссылка
-       <input id="meme-url" placeholder="ссылка на изображение" type="url"/>
-      </label>
-      <label class="file-label">
-       или файл мема
-       <input accept="image/png,image/jpeg,image/webp,image/gif" data-image="meme" type="file"/>
-      </label>
-      <button aria-pressed="false" class="secondary placeholder-toggle" id="meme-placeholder" type="button">
+      
+      
+      
+      
+      
+      
+      
+      
+      
+      
+     <form id="media-form"><p class="hint">желательно прикреплять изображения файлом, а не ссылкой: так они будут храниться на нашем сайте.</p><fieldset class="media-group"><legend>портрет</legend><label>ссылка на изображение<input id="portrait-url" placeholder="ссылка на изображение" type="url" autocomplete="off" name="questionnaire-portrait-image-url" data-lpignore="true" data-1p-ignore="true">
+      </label><label class="file-label">прикрепить файл<input accept="image/png,image/jpeg,image/webp,image/gif" data-image="portrait" type="file">
+      </label></fieldset><fieldset class="media-group"><legend>мем</legend><label>ссылка на изображение<input id="meme-url" placeholder="ссылка на изображение" type="url" autocomplete="off" name="questionnaire-meme-image-url" data-lpignore="true" data-1p-ignore="true">
+      </label><label class="file-label">прикрепить файл<input accept="image/png,image/jpeg,image/webp,image/gif" data-image="meme" type="file">
+      </label><button aria-pressed="false" class="secondary placeholder-toggle" id="meme-placeholder" type="button">
        использовать заглушку
-      </button>
-      <label>
-       ловец снов · ссылка
-       <input id="dream-url" placeholder="ссылка на изображение" type="url"/>
-      </label>
-      <label class="file-label">
-       или файл ловца снов
-       <input accept="image/png,image/jpeg,image/webp,image/gif" data-image="dream" type="file"/>
-      </label>
-      <button aria-pressed="false" class="secondary placeholder-toggle" id="dream-placeholder" type="button">
+      </button></fieldset><fieldset class="media-group"><legend>ловец снов</legend><label>ссылка на изображение<input id="dream-url" placeholder="ссылка на изображение" type="url" autocomplete="off" name="questionnaire-dream-image-url" data-lpignore="true" data-1p-ignore="true">
+      </label><label class="file-label">прикрепить файл<input accept="image/png,image/jpeg,image/webp,image/gif" data-image="dream" type="file">
+      </label><button aria-pressed="false" class="secondary placeholder-toggle" id="dream-placeholder" type="button">
        использовать заглушку
-      </button>
-      <button class="secondary" id="clear-images">
-       сбросить добавленные картинки
-      </button>
-     </details>
+      </button></fieldset><div class="media-reset"><p class="hint">общий сброс для выбранного ученика</p><button class="secondary" id="clear-images" type="button">сбросить все добавленные изображения</button></div></form></details>
      <details>
       <summary>
        ответы ученика
@@ -128,7 +111,7 @@
       </div>
      </details>
     </div>
-    <section id="github-panel">
+    <form id="github-panel">
      <h2>
       публикация на гитхаб
      </h2>
@@ -138,30 +121,30 @@
       </summary>
       <label>
        владелец / организация
-       <input id="gh-owner" value="raven-hd"/>
+       <input id="gh-owner" value="raven-hd">
       </label>
       <label>
        репозиторий
-       <input id="gh-repo" value="tower"/>
+       <input id="gh-repo" value="tower">
       </label>
       <div class="two">
        <label>
         ветка
-        <input id="gh-branch" value="main"/>
+        <input id="gh-branch" value="main">
        </label>
        <label>
         папка анкет
-        <input id="gh-folder" value="questionnaire"/>
+        <input id="gh-folder" value="questionnaire">
        </label>
       </div>
       <label>
        адрес этой папки на сайте
-       <input id="gh-site" type="url" value="https://raven-hd.github.io/tower/questionnaire/"/>
+       <input id="gh-site" type="url" value="https://raven-hd.github.io/tower/questionnaire/">
       </label>
      </details>
      <label>
       токен
-      <input autocomplete="off" id="gh-token" spellcheck="false" type="password"/>
+      <input autocomplete="new-password" id="gh-token" spellcheck="false" type="password" name="questionnaire-github-token">
      </label>
      <label>
       публиковать
@@ -177,12 +160,12 @@
      <p class="hint">
       проверьте → подготовьте → опубликуйте. после любых новых правок подготовку нужно повторить. остальные анкеты на сайте сохраняются.
      </p>
-     <button class="secondary" id="gh-prepare">
+     <button class="secondary" id="gh-prepare" type="button">
       проверить и подготовить
      </button>
      <div hidden="" id="gh-review">
       <pre id="gh-summary">            </pre>
-      <button id="gh-publish">
+      <button id="gh-publish" type="button">
        опубликовать подготовленное
       </button>
      </div>
@@ -190,7 +173,7 @@
      </p>
      <div id="gh-links">
      </div>
-    </section>
+    </form>
     <details id="reserve-panel">
      <summary>
       резервные действия
@@ -199,13 +182,13 @@
       скачивание файлов для ручной загрузки и сохранение проекта для продолжения работы. проект не сохраняется автоматически.
      </p>
      <div class="actions">
-      <button id="download">
+      <button id="download" type="button">
        скачать анкету для сайта · ZIP
       </button>
-      <button class="secondary" id="all">
+      <button class="secondary" id="all" type="button">
        скачать все для сайта · ZIP
       </button>
-      <button class="secondary" id="save-draft">
+      <button class="secondary" id="save-draft" type="button">
        сохранить проект редактора
       </button>
      </div>
@@ -217,10 +200,10 @@
       <span>
        предпросмотр
       </span>
-      <button class="secondary" id="desktop">
+      <button class="secondary" id="desktop" type="button">
        компьютер
       </button>
-      <button class="secondary" id="mobile">
+      <button class="secondary" id="mobile" type="button">
        телефон
       </button>
      </div>
@@ -365,5 +348,6 @@
   </script>
   <script src="editor-assets/preview.js">
   </script>
- </body>
-</html>
+ 
+
+</body></html>

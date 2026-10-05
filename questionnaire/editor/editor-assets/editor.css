@@ -43,3 +43,12 @@ body.preview-expanded{overflow:hidden}
 .editor-heading .catalog-link,.editor-heading .guide-open,.editor-heading .upload{margin:0;padding:9px 8px;font-size:12px;display:flex;align-items:center;justify-content:center;text-decoration:none}
 .placeholder-toggle{font-size:12px;padding:8px 10px;margin:0 0 12px}.placeholder-toggle[aria-pressed=true]{background:#55577d;color:white}
 @media(max-width:420px){.editor-heading{grid-template-columns:1fr 1fr 1.2fr}.editor-heading .catalog-link,.editor-heading .guide-open{font-size:11px;padding:8px 5px}.editor-heading .upload{font-size:12px;padding:8px 5px;white-space:normal}}
+/* Native file inputs must stay hidden inside the upload button. */
+input[hidden]{display:none!important}
+.editor-heading{grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(0,1.15fr)}
+.editor-heading .upload{white-space:normal;min-width:0}
+.media-group{margin:14px 0;padding:14px 12px 10px;border:1px solid #ddd6cc;border-radius:8px;background:#f7f4ee}
+.media-group legend{padding:0 6px;font-size:14px;font-weight:bold}
+.media-group label{margin-top:0;margin-bottom:10px}.media-group .placeholder-toggle{display:block;margin-bottom:0}
+.media-reset{border-top:1px solid #d5cfc4;margin-top:20px;padding-top:12px;display:grid;gap:9px}
+.media-reset .hint{margin:0}.media-reset button{justify-self:start;font-size:12px;padding:9px 11px}

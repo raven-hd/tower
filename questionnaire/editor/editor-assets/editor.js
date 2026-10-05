@@ -67,3 +67,5 @@
  records=[];list();
  window.AnketaEditor={flush:readControls,renderHTML,siteHTML,sharedAssets,makeRecord,normalize,importExcel,getRecords:()=>records};
 })();
+// These forms isolate browser autofill; all actions are handled in JavaScript.
+for(const id of ['media-form','github-panel'])document.getElementById(id).addEventListener('submit',event=>event.preventDefault());
