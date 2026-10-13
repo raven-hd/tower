@@ -1,7 +1,69 @@
 {
   "version": 2,
-  "exported": "2026-10-05T21:43:25.254Z",
+  "exported": "2026-10-13T21:05:17.796Z",
   "archive": [
+    {
+      "type": "weekly",
+      "season": "Осень 2026",
+      "dates": "12.10 — 18.10",
+      "saved_at": "2026-10-13T21:05:17.794Z",
+      "issue_num": "11",
+      "points": "33",
+      "points_total": "252",
+      "points_note": "Лучшие студенты факультета:\nЭлоди Вокер [117 баллов]\nЭсмеральда Гюго [30 баллов]\nМария Торнаги [14 баллов]",
+      "position": "4",
+      "quill_num": "",
+      "quill_theme": "",
+      "quill_text": "",
+      "students_list": [],
+      "events_list": [
+        {
+          "text": "Индивидуальные расписания",
+          "url": "https://dhog.org/schedule",
+          "linkText": "Индивидуальные расписания"
+        },
+        "День Гриффиндора подошёл к концу, ждём итогов!",
+        "Церемония распределения 14 октября",
+        {
+          "text": "Открытие кабинета Магической дипломатии",
+          "url": "https://dhog.org/cabinets/diplomacy",
+          "linkText": "Магической дипломатии"
+        },
+        {
+          "text": "И всё ещё (и ещё три два месяца): ВШТ",
+          "url": "https://dhog.org/viewforum.php?f=159",
+          "linkText": "ВШТ"
+        }
+      ],
+      "news_list": [
+        {
+          "text": "INCTOBER в самом разгаре!",
+          "url": "https://dhog.org/viewtopic.php?p=184501#p184501",
+          "linkText": "INCTOBER"
+        },
+        {
+          "text": "Турнир Фруктокога подходит к концу, но Фруктовые бои не заканчиваются!",
+          "url": "https://raven-hd.github.io/fruitkog-battle/",
+          "linkText": "Фруктокога"
+        },
+        {
+          "text": "Инвентаризация 2.0 в Чулане: новые карточки, новые подарки, но по-прежнему весело!",
+          "url": "https://rave.dhog.org/viewtopic.php?p=41525#p41525",
+          "linkText": "Инвентаризация 2.0"
+        }
+      ],
+      "arrow": true,
+      "bds": [
+        {
+          "name": "Септима Аллен",
+          "date": "16 октября",
+          "photo": "./img/uploads/2026/10/1791925493217-.png"
+        }
+      ],
+      "studentsVisible": false,
+      "bdVisible": true,
+      "quillVisible": false
+    },
     {
       "type": "weekly",
       "season": "Осень 2026",
