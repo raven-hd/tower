@@ -1,21 +1,30 @@
 {
   "version": 2,
-  "exported": "2026-10-13T21:05:17.796Z",
+  "exported": "2026-10-15T21:00:12.940Z",
   "archive": [
     {
       "type": "weekly",
       "season": "Осень 2026",
       "dates": "12.10 — 18.10",
-      "saved_at": "2026-10-13T21:05:17.794Z",
+      "saved_at": "2026-10-15T21:00:12.938Z",
       "issue_num": "11",
-      "points": "33",
-      "points_total": "252",
-      "points_note": "Лучшие студенты факультета:\nЭлоди Вокер [117 баллов]\nЭсмеральда Гюго [30 баллов]\nМария Торнаги [14 баллов]",
+      "points": "156",
+      "points_total": "375",
+      "points_note": "Лучшие студенты факультета:\nЭлоди Вокер [117 баллов]\nТеа Старлайт [91 балл]\nЭсмеральда Гюго [70 баллов]",
       "position": "4",
       "quill_num": "",
       "quill_theme": "",
       "quill_text": "",
-      "students_list": [],
+      "students_list": [
+        {
+          "name": "Теа Старлайт",
+          "photo": "./img/uploads/2026/10/1792097873722-.png"
+        },
+        {
+          "name": "Артемисия Крум",
+          "photo": "./img/uploads/2026/10/1792097897859-.jpg"
+        }
+      ],
       "events_list": [
         {
           "text": "Индивидуальные расписания",
@@ -52,7 +61,7 @@
           "linkText": "Инвентаризация 2.0"
         }
       ],
-      "arrow": true,
+      "arrow": false,
       "bds": [
         {
           "name": "Септима Аллен",
@@ -60,7 +69,7 @@
           "photo": "./img/uploads/2026/10/1791925493217-.png"
         }
       ],
-      "studentsVisible": false,
+      "studentsVisible": true,
       "bdVisible": true,
       "quillVisible": false
     },
