@@ -116,6 +116,13 @@
       "files": [
         "students/student-1e42ba04fec836b3/index.html"
       ]
+    },
+    "student-7a238cbe7a62761b": {
+      "name": "Айлин Берг",
+      "files": [
+        "students/student-7a238cbe7a62761b/images/image-1.jpg",
+        "students/student-7a238cbe7a62761b/index.html"
+      ]
     }
   },
   "shared": [
