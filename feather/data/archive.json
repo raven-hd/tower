@@ -1,12 +1,12 @@
 {
   "version": 2,
-  "exported": "2026-10-25T09:06:53.904Z",
+  "exported": "2026-10-25T09:10:58.192Z",
   "archive": [
     {
       "type": "weekly",
       "season": "Осень 2026",
       "dates": "26.10 — 01.11",
-      "saved_at": "2026-10-25T09:06:53.902Z",
+      "saved_at": "2026-10-25T09:10:58.189Z",
       "issue_num": "13",
       "points": "164",
       "points_total": "539",
@@ -41,6 +41,16 @@
           "text": "Церемония распределения: 1 ноября (воскресенье) 18:30",
           "url": "https://dhog.org/viewtopic.php?p=185428#p185428",
           "linkText": "1 ноября (воскресенье) 18:30"
+        },
+        {
+          "text": "Осенняя ярмарка в Хогсмиде",
+          "url": "https://hogsmeade.dhog.org/viewforum.php?f=213",
+          "linkText": "Осенняя ярмарка"
+        },
+        {
+          "text": "Тыквовин: Всадник Тыквовина снова у нас в краях!",
+          "url": "https://dhog.org/viewforum.php?f=162",
+          "linkText": "Тыквовин"
         }
       ],
       "news_list": [
