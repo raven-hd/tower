@@ -1,7 +1,66 @@
 {
   "version": 2,
-  "exported": "2026-10-25T09:00:16.770Z",
+  "exported": "2026-10-25T09:06:53.904Z",
   "archive": [
+    {
+      "type": "weekly",
+      "season": "Осень 2026",
+      "dates": "26.10 — 01.11",
+      "saved_at": "2026-10-25T09:06:53.902Z",
+      "issue_num": "13",
+      "points": "164",
+      "points_total": "539",
+      "points_note": "Элоди Вокер [269 баллов]\nТеа Старлайт [91 баллов]\nЭсмеральда Гюго [70 баллов]",
+      "position": "4",
+      "quill_num": "",
+      "quill_theme": "",
+      "quill_text": "",
+      "students_list": [],
+      "events_list": [
+        {
+          "text": "Индивидуальные расписания",
+          "url": "https://dhog.org/schedule",
+          "linkText": "Индивидуальные расписания"
+        },
+        {
+          "text": "И всё ещё (и ещё три два месяца): ВШТ",
+          "url": "https://dhog.org/viewforum.php?f=159",
+          "linkText": "ВШТ"
+        },
+        {
+          "text": "Новые кабинеты: Магическая кулинария",
+          "url": "https://dhog.org/cabinets/cooking",
+          "linkText": "магическая кулинария"
+        },
+        {
+          "text": "Новые кабинеты: Магия камней",
+          "url": "https://dhog.org/cabinets/magic-stones",
+          "linkText": "Магия камней"
+        },
+        {
+          "text": "Церемония распределения: 1 ноября (воскресенье) 18:30",
+          "url": "https://dhog.org/viewtopic.php?p=185428#p185428",
+          "linkText": "1 ноября (воскресенье) 18:30"
+        }
+      ],
+      "news_list": [
+        {
+          "text": "INCTOBER в самом разгаре!",
+          "url": "https://dhog.org/viewtopic.php?p=184501#p184501",
+          "linkText": "INCTOBER"
+        },
+        {
+          "text": "Инвентаризация 2.0 в Чулане: новые карточки, новые подарки, но по-прежнему весело!",
+          "url": "https://rave.dhog.org/viewtopic.php?p=41525#p41525",
+          "linkText": "Инвентаризация 2.0"
+        }
+      ],
+      "arrow": true,
+      "bds": [],
+      "studentsVisible": false,
+      "bdVisible": false,
+      "quillVisible": false
+    },
     {
       "type": "weekly",
       "season": "Осень 2026",
