@@ -2,57 +2,439 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="dark">
-<title>All the Young Ravens — тест iframe</title>
+<meta name="description" content="ALL THE YOUNG RAVENS — доска объявлений Башни Когтеврана">
+<title>ALL THE YOUNG RAVENS — Башня Когтеврана</title>
 <style>
-:root{--deep:#0c1b2d;--navy:#162b43;--gold:#b89a73;--cream:#e4d1b7;font-family:Georgia,'Times New Roman',serif;color:var(--cream)}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:transparent}
-body{padding:5px}
-.board{position:relative;min-height:max(426px,calc(100vh - 10px));width:100%;padding:clamp(16px,3vw,28px);border:1px solid #8f7859;background:radial-gradient(ellipse at 45% 0,#2a4059,transparent 62%),linear-gradient(135deg,#172b42,#112137);box-shadow:inset 0 0 0 4px #0d1d31,inset 0 0 0 5px #77614780;overflow:hidden}
-.eyebrow{display:flex;align-items:center;justify-content:center;gap:13px;margin:0 0 12px;font:10px Arial,sans-serif;letter-spacing:.18em;color:#a99a87;text-align:center}
-.eyebrow::before,.eyebrow::after{content:'';width:48px;height:1px;background:#9d7c58}
-header{text-align:center}
-h1{margin:0;line-height:1.05;font-weight:400}
-.all{font:italic clamp(20px,4vw,30px) Georgia,serif;color:#e7d9c9;text-transform:lowercase}
-.young{font-size:clamp(20px,4vw,33px);letter-spacing:.07em}
-.ravens{display:table;margin:8px auto 0;padding:5px 12px 7px;border:1px solid #877053;background:#101625;letter-spacing:.19em;font-size:clamp(25px,5.4vw,42px)}
-.subtitle{margin:10px 0 19px;color:#b7b4b0;font:11px/1.4 Arial,sans-serif}
-.notes{display:grid;grid-template-columns:1.15fr 1fr 1fr;gap:12px;max-width:850px;margin:auto}
-.note{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;min-height:128px;padding:18px 12px;text-align:center;text-decoration:none;color:inherit;border:1px solid #aa8e6d82;background:linear-gradient(150deg,#c2a98b15,#bda68d08);transition:box-shadow .25s,border-color .25s}
-a.note:hover,a.note:focus-visible{outline:none;border-color:#d2ad7d;box-shadow:0 7px 24px #0008}
-.note small{font:10px/1.2 Arial,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:#b5bdc4}
-.note strong{font-size:clamp(15px,2vw,19px);font-weight:400;color:#ead1ac}
-.note em{font:11px/1.35 Arial,sans-serif;font-style:normal;color:#b7b2b1}
-.rings{display:flex;gap:12px;justify-content:center;margin:-18px 0 1px}
-.rings i{width:7px;height:19px;border:2px solid var(--gold);background:#1a2c3f;border-radius:7px}
-.foot{display:flex;justify-content:center;align-items:center;gap:10px;margin-top:19px;color:#c6af91;text-align:center;font:10px Arial,sans-serif;letter-spacing:.09em}
-.foot:before,.foot:after{content:'◆';font-size:7px;color:#b99768}
-@media(max-width:560px){.board{padding:15px 10px;min-height:max(465px,calc(100vh - 10px))}.notes{grid-template-columns:1fr 1fr;gap:9px}.note{min-height:113px;padding:16px 7px;gap:7px}.note:first-child{grid-column:1/-1;min-height:98px}.subtitle{margin-bottom:14px}.foot{font-size:9px}}
-@media(prefers-reduced-motion:reduce){.note{transition:none}}
+/* =======================================================
+   ALL THE YOUNG RAVENS · BOARD V3
+   Оформление доски. Изменяемые объявления и даты — внизу
+   файла, в разделе НАСТРОЙКИ СОДЕРЖИМОГО.
+   ======================================================= */
+:root {
+  color-scheme: dark;
+  --raven-midnight: #101d30;
+  --raven-ink: #1a2a3a;
+  --raven-bronze: #987852;
+  --raven-gold: #c1a37b;
+  --raven-paper: #e1d5c5;
+  --raven-shadow: rgba(2, 8, 16, .5);
+  font-family: Georgia, 'Times New Roman', serif;
+  font-synthesis: none;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html, body { margin: 0; padding: 0; min-height: 100%; }
+html { background: transparent; }
+body { background: transparent; color: #e8d8bd; }
+a { color: inherit; }
+a, button { -webkit-tap-highlight-color: transparent; }
+button { font: inherit; }
+
+.raven-board {
+  margin: 0;
+  width: 100%;
+  padding: 7px;
+  overflow: hidden;
+  border: 1px solid #876b48;
+  background: #111f32;
+  box-shadow: inset 0 0 0 3px #0e1b2a, inset 0 0 0 4px rgba(181,145,91,.36);
+}
+.raven-board__inner {
+  position: relative;
+  isolation: isolate;
+  min-height: 615px;
+  padding: clamp(24px,3.2vw,38px) clamp(19px,3.4vw,39px) clamp(26px,3.3vw,39px);
+  border: 1px solid rgba(173,136,89,.65);
+  overflow: hidden;
+  background-color: #24272c;
+  background-image:
+    radial-gradient(circle at 15% 11%, rgba(183,149,108,.065) 0 0.7px, transparent 1px),
+    radial-gradient(circle at 12% 18%, rgba(4,13,22,.25) 0 0.7px, transparent 1.3px),
+    radial-gradient(ellipse at 57% 2%,rgba(41,55,70,.24),transparent 57%),
+    linear-gradient(145deg,#292b2d 0%,#22272d 54%,#1c2731 100%);
+  background-size: 19px 21px, 31px 25px, auto, auto;
+}
+.raven-board__inner::before {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  inset: 8px;
+  border: 1px solid rgba(159,122,77,.25);
+}
+.raven-board__inner::after {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  z-index: -1;
+  inset: 0;
+  background: radial-gradient(ellipse at 43% 43%,transparent 38%,rgba(11,20,31,.22) 100%);
+}
+
+/* DESKTOP: календарь строго в левой четверти, заголовок + записки справа */
+.layout {
+  display: grid;
+  grid-template-columns: minmax(175px, .255fr) minmax(0, .745fr);
+  column-gap: clamp(23px,3.5vw,47px);
+  max-width: 1100px;
+  margin: auto;
+  align-items: start;
+}
+.calendar-column { grid-column: 1; grid-row: 1 / 3; padding-top: 44px; min-width: 0; }
+.magazine-heading { grid-column: 2; grid-row: 1; min-width: 0; text-align: center; padding: 0 2px 24px; }
+.news-column { grid-column: 2; grid-row: 2; min-width: 0; }
+
+/* Заголовок: all — один фрагмент, the young — вырезки, RAVENS — общая полоска */
+.headline { display: flex; justify-content: center; align-items: center; flex-wrap: wrap; gap: 5px 7px; margin: 0; min-height: 88px; }
+.headline__all {
+  flex: 0 0 auto;
+  padding: 5px 11px 7px;
+  font: italic clamp(26px,3.25vw,40px)/1 Georgia,serif;
+  color: #253249;
+  background: linear-gradient(150deg,#e8dfd1,#cfbeaa);
+  transform: rotate(-4deg) translateY(1px);
+  clip-path: polygon(1% 2%,98% 0%,100% 94%,0 100%);
+  box-shadow: 2px 3px 4px #0004;
+}
+.headline__young { display: inline-flex; align-items: center; justify-content: center; gap: 1px; flex-wrap: nowrap; white-space: nowrap; margin: 0 3px; }
+.cut {display:inline-flex; flex:0 0 auto;align-items:center;justify-content:center; width:clamp(18px,2.65vw,31px); height:clamp(32px,3.9vw,44px); color:#1f2b3b; box-shadow:1px 3px 4px #0006;}
+.cut--t {background:#b6c0c3; font: italic 29px Georgia,serif;transform:rotate(-5deg) translateY(1px);}
+.cut--h {background:#ddd1bf; font:normal 32px 'Times New Roman',serif;transform:rotate(3deg) translateY(5px);height:41px;}
+.cut--e {background:#b9a7ad; font:italic 31px Georgia,serif;transform:rotate(-3deg) translateY(-1px);}
+.cut--gap {width:9px;background:transparent;box-shadow:none;}
+.cut--Y {background:#c3b29d;font:31px Georgia,serif;transform:rotate(4deg);}
+.cut--O {background:#223d5a;color:#f2e5d0;font:bold 26px Arial,sans-serif;transform:rotate(-4deg);}
+.cut--U {background:#eadac5;font:31px 'Times New Roman',serif;transform:rotate(3deg) translateY(2px);}
+.cut--N {background:#aebdc5;font:bold 29px 'Arial Narrow',Arial,sans-serif;transform:rotate(-3deg);}
+.cut--G {background:#d4c0a8;font:italic 32px Georgia,serif;transform:rotate(5deg) translateY(2px);}
+.headline__ravens {
+  display:inline-block;
+  background:#0c1625;
+  color:#ead8bc;
+  border:1px solid rgba(183,149,109,.72);
+  padding:9px 12px 10px 16px;
+  font:normal clamp(29px,3.7vw,43px)/.95 Georgia,serif;
+  letter-spacing:.13em;
+  box-shadow:3px 5px 8px #0008;
+  transform:rotate(1.5deg);
+  white-space:nowrap;
+}
+.headline__under { height: 1px; margin: 21px auto 0; width: min(58%,310px); background: linear-gradient(to right,transparent,rgba(163,126,78,.68),transparent); }
+
+/* Три компактные страницы вертикального календаря */
+.calendar { max-width: 255px; margin: 0 auto; width: 100%; filter: drop-shadow(5px 8px 7px #0005); }
+.calendar__top-bind, .calendar__join {position:relative;z-index:4;display:flex;justify-content:space-around;align-items:center;padding:0 10px; height:24px; margin:0 7px -9px;pointer-events:none;}
+.calendar__top-bind::before {content:'';position:absolute;left:1%;right:1%;top:11px;height:2px;background:linear-gradient(90deg,#756249,#d4b58a,#745d42);z-index:-1;}
+.calendar__join { height:23px; margin-top:-10px; margin-bottom:-9px; }
+.calendar__spring {display:block;width:8px;height:23px;border:2px solid #b79972;border-radius:6px;background:linear-gradient(90deg,#604b32,#c0a47f 43%,#56452f);box-shadow:1px 1px 2px #000a;}
+.calendar__sheet {
+  position:relative;
+  min-width:0;
+  height:clamp(117px,12vw,139px);
+  padding:21px 10px 17px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:6px;
+  text-align:center;
+  color:#233146;
+  border:1px solid rgba(116,100,84,.52);
+  box-shadow: inset 0 0 0 1px rgba(248,238,224,.28);
+  background-image:repeating-linear-gradient(0deg,transparent 0 2px,rgba(49,38,34,.018) 3px),linear-gradient(154deg,rgba(237,222,203,.97),rgba(201,182,157,.93));
+}
+.calendar__sheet--countdown { background-image:repeating-linear-gradient(0deg,transparent 0 2px,rgba(49,38,34,.018) 3px),linear-gradient(145deg,rgba(226,212,218,.97),rgba(194,180,192,.93));}
+.calendar__sheet--welcome { background-image:repeating-linear-gradient(0deg,transparent 0 2px,rgba(49,38,34,.018) 3px),linear-gradient(145deg,rgba(218,225,222,.97),rgba(183,198,194,.93));}
+.calendar__sheet--event {clip-path:polygon(0 0,100% 0,99.2% 100%,.6% 99.5%);}
+.calendar__sheet--countdown {clip-path:polygon(.5% 0,99.4% .5%,100% 100%,0 99.4%);}
+.calendar__sheet--welcome {clip-path:polygon(0 .4%,100% 0,99.5% 99.8%,.5% 100%);}
+.calendar__text {margin:0;max-width:100%;font-size:clamp(18px,2.3vw,27px);line-height:1.12;font-weight:400;overflow-wrap:anywhere;text-wrap:balance;}
+.calendar__text--event {font-size:clamp(18px,2.1vw,24px);}
+.calendar__text--name {font-size:clamp(18px,2.2vw,25px);}
+.calendar__eyebrow {font:10px/1.3 Arial,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:rgba(42,47,60,.65);}
+.calendar__number {font:normal clamp(30px,4vw,45px)/.9 Georgia,serif;margin-top:1px;color:#253249;max-width:100%;overflow-wrap:anywhere;text-wrap:balance;}
+.calendar__number small {font:18px Georgia,serif;}
+.calendar__foot {font:11px/1.2 Arial,sans-serif;color:#55535b;}
+.calendar__sheet[hidden] {display:none;}
+
+/* Редакционные объявления: собственные вырезки, без лишних украшений */
+.notes-area {display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr) minmax(100px,.43fr);gap:clamp(12px,1.7vw,24px);align-items:center;padding:12px 4px 7px;}
+.notes {grid-column:1 / 3;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:clamp(20px,2vw,27px) clamp(12px,2vw,23px);align-items:center;}
+.note {position:relative;min-height:178px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:22px 13px 16px;color:#293143;box-shadow:4px 6px 8px var(--raven-shadow);transition:filter .2s,transform .2s,box-shadow .2s;}
+.note__label {font:9px/1.25 Arial,sans-serif;letter-spacing:.14em;color:#83766d;text-transform:uppercase;}
+.note__text {margin:10px auto 0;font:normal clamp(17px,1.95vw,23px)/1.14 Georgia,'Times New Roman',serif;letter-spacing:-.03em;text-wrap:balance;}
+.note__text em {font-style:italic;}
+.note__small {font:10px/1.3 Arial,sans-serif;color:#796e64;margin-top:10px;}
+.note__pin {position:absolute;top:-7px;left:49%;width:14px;height:14px;background:radial-gradient(circle at 31% 26%,#efcfa1,#aa844f 52%,#593b1e 90%);border:1px solid #6e5236;border-radius:50%;box-shadow:1px 3px 4px #0006;}
+.note__tape {position:absolute;top:-12px;left:35%;height:20px;width:72px;background:rgba(168,146,151,.6);box-shadow:1px 2px 2px #0002;transform:rotate(-5deg);}
+.note--story {background:linear-gradient(138deg,#eee1ce,#d2bda6);transform:rotate(-3deg);clip-path:polygon(0 1%,99% 0,100% 99%,1% 100%);}
+.note--quidditch .note__text {font-style:italic;}
+.note--quidditch {background:linear-gradient(146deg,#e4ded6,#c5bdb5);transform:rotate(3deg) translateY(3px);clip-path:polygon(.5% 0,99% 1%,99.8% 100%,0 98%);}
+.note--games {background:linear-gradient(142deg,#d5c2c7,#bfaab3);transform:rotate(2deg);clip-path:polygon(0 1%,100% 0,98.5% 99.7%,1% 100%);}
+.note--new {background:linear-gradient(142deg,#ead9c5,#d4c0aa);transform:rotate(-2deg) translateY(3px);clip-path:polygon(1% 0,100% 1%,99% 100%,0 99%);text-decoration:none;}
+a.note:hover,a.note:focus-visible {filter:brightness(1.055);transform:translateY(-5px) rotate(0deg);box-shadow:5px 10px 14px #000a;outline:2px solid #d9b98c;outline-offset:3px;}
+a.note .note__small {text-decoration:underline;text-decoration-color:#a77f53;text-underline-offset:3px;}
+
+/* Небольшой флаер (демонстрационный) */
+.flyer-slot[hidden] {display:none;}
+.notes-area:has(.flyer-slot[hidden]) {grid-template-columns:minmax(0,1fr);}
+.notes-area:has(.flyer-slot[hidden]) .notes {grid-column:1/-1;}
+.flyer-slot {grid-column:3;align-self:end;display:flex;justify-content:center;align-items:center;min-width:0;padding:0 0 9px;}
+.flyer {position:relative;width:min(100%,150px);min-height:155px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:7px;padding:15px 9px;background:#d8c5aa;color:#243448;box-shadow:4px 6px 9px #0009;transform:rotate(6deg);clip-path:polygon(0 1%,100% 0,99% 100%,2% 99%);}
+.flyer::before {content:'';position:absolute;inset:9px;border:1px dashed rgba(51,65,71,.5);pointer-events:none;}
+.flyer__brand {font:11px/1.2 Georgia,serif;letter-spacing:.07em;}
+.flyer__value {font:normal clamp(30px,3.1vw,43px)/.95 Georgia,serif;}
+.flyer__value small {font-size:.5em;}
+.flyer__text {font:9px/1.4 Arial,sans-serif;text-transform:uppercase;text-align:center;letter-spacing:.045em;}
+
+/* Плашка справа не создает пустых зон: на средней ширине уходит под записки */
+@media (max-width:950px) {
+  .raven-board__inner {padding:24px 20px 30px;min-height:0;}
+  .layout {grid-template-columns:minmax(162px,.29fr) minmax(0,.71fr);column-gap:26px;}
+  .calendar-column {padding-top:56px;}
+  .calendar__sheet {height:126px;}
+  .calendar__text {font-size:20px;}
+  .calendar__text--event {font-size:19px;}
+  .notes-area {grid-template-columns:minmax(0,1fr) minmax(0,1fr);}
+  .notes {grid-column:1 / -1;}
+  .flyer-slot {grid-column:1 / -1;justify-content:flex-end;padding:0 20px 0 0;}
+  .flyer {width:118px;min-height:93px;gap:3px;padding:10px 7px;}
+  .flyer__value {font-size:27px;}
+  .flyer__text {font-size:8px;}
+  .note {min-height:153px;}
+}
+@media (max-width:700px) {
+  .layout {display:flex;flex-direction:column;align-items:stretch;gap:24px;}
+  .magazine-heading {order:0;padding:0;}
+  .calendar-column {order:1;padding-top:0;width:100%;}
+  .news-column {order:2;width:100%;}
+  .calendar {width:min(100%,280px);max-width:280px;}
+  .calendar__sheet {height:112px;padding:12px;}
+  .calendar__text--event {font-size:21px;}
+  .calendar__text {font-size:21px;}
+  .calendar__number {font-size:35px;}
+  .calendar__top-bind,.calendar__join {padding:0 24px;}
+  .headline__ravens {font-size:clamp(28px,6.6vw,40px);}
+  .cut {width:clamp(22px,5.1vw,30px);height:38px;}
+  .headline__all {font-size:clamp(25px,5.8vw,34px);}
+  .headline__under {margin-top:15px;}
+  .notes {gap:18px 14px;}
+  .note {min-height:155px;padding:20px 11px 15px;}
+  .note__text {font-size:clamp(17px,4vw,23px);}
+}
+@media (max-width:400px) {
+  .raven-board {padding:4px;}
+  .raven-board__inner {padding:20px 12px 25px;}
+  .headline {gap:6px 5px;}
+  .headline__ravens {letter-spacing:.12em;padding:8px 11px;}
+  .cut {width:23px;height:33px;font-size:25px;}
+  .cut--h {height:34px;}
+  .cut--gap {width:5px;}
+  .notes {gap:19px 11px;}
+  .note {min-height:141px;padding:17px 7px 13px;}
+  .note__text {font-size:clamp(16px,4.1vw,19px);}
+  .note__label {font-size:8px;}
+  .flyer-slot {padding-right:2px;}
+}
+@media (prefers-reduced-motion:reduce) { a.note {transition:none;} }
 </style>
 </head>
 <body>
-<main class="board" aria-label="Тестовая доска All the Young Ravens">
-  <p class="eyebrow">ТЕСТ ВСТРАИВАНИЯ · GITHUB PAGES</p>
-  <header>
-    <h1><span class="all">all</span> <span class="young">THE YOUNG</span><span class="ravens">RAVENS</span></h1>
-    <p class="subtitle">Пробная страница для Башни Когтеврана — оформление еще не финальное</p>
-  </header>
-  <div class="notes">
-    <section class="note">
-      <div class="rings" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
-      <small>Календарь Башни</small><strong>Сейчас в Башне</strong><em>Здесь будет перелистываемый календарь</em>
-    </section>
-    <a class="note" href="https://raven-hd.github.io/tower/feather/index.html" target="_blank" rel="noopener noreferrer">
-      <small>Проверка ссылки</small><strong>Новости факультета</strong><em>Откроются в новой вкладке</em>
-    </a>
-    <a class="note" href="https://rave.dhog.org/viewtopic.php?t=4" target="_blank" rel="noopener noreferrer">
-      <small>Проверка ссылки</small><strong>Экскурсия</strong><em>Откроется в новой вкладке</em>
-    </a>
+<main class="raven-board" id="raven-board" aria-label="All the Young Ravens — объявления Башни Когтеврана">
+  <div class="raven-board__inner">
+    <div class="layout">
+      <section class="calendar-column" aria-label="Календарь Башни">
+        <div class="calendar" role="group" aria-label="Три листа календаря">
+          <div class="calendar__top-bind" aria-hidden="true"><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i></div>
+          <article class="calendar__sheet calendar__sheet--event">
+            <p class="calendar__text calendar__text--event" id="cal-event">Инвентаризация<br>в чулане</p>
+          </article>
+          <div class="calendar__join" aria-hidden="true"><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i></div>
+          <article class="calendar__sheet calendar__sheet--countdown" aria-live="polite" id="calendar-second">
+            <span class="calendar__eyebrow" id="cal-second-label">До конца семестра</span>
+            <p class="calendar__number" id="cal-second-value">— <small>дней</small></p>
+          </article>
+          <div class="calendar__join" aria-hidden="true"><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i><i class="calendar__spring"></i></div>
+          <article class="calendar__sheet calendar__sheet--welcome" aria-live="polite" id="calendar-third">
+            <span class="calendar__eyebrow" id="cal-third-label">Новые птицы</span>
+            <p class="calendar__text calendar__text--name" id="cal-third-value">Селеста Фэрроу</p>
+            <span class="calendar__foot" id="cal-third-foot">Добро пожаловать!</span>
+          </article>
+        </div>
+      </section>
+
+      <header class="magazine-heading">
+        <h1 class="headline" aria-label="ALL THE YOUNG RAVENS">
+          <span class="headline__all" aria-hidden="true">all</span>
+          <span class="headline__young" aria-hidden="true">
+            <span class="cut cut--t">t</span><span class="cut cut--h">h</span><span class="cut cut--e">e</span>
+            <span class="cut cut--gap"></span>
+            <span class="cut cut--Y">Y</span><span class="cut cut--O">O</span><span class="cut cut--U">U</span><span class="cut cut--N">N</span><span class="cut cut--G">G</span>
+          </span>
+          <span class="headline__ravens" aria-hidden="true">RAVENS</span>
+        </h1>
+        <div class="headline__under" aria-hidden="true"></div>
+      </header>
+
+      <section class="news-column" aria-label="Записки и объявления">
+        <div class="notes-area">
+          <div class="notes" id="notice-list">
+            <article class="note note--story">
+              <span class="note__pin" aria-hidden="true"></span>
+              <span class="note__label">Сюжет / библиотека</span>
+              <p class="note__text">Ищу соигрока<br>для библиотечного<br><em>сюжета!</em></p>
+            </article>
+            <article class="note note--quidditch">
+              <span class="note__tape" aria-hidden="true"></span>
+              <span class="note__label">Команда / квиддич</span>
+              <p class="note__text">Собираем<br>команду на<br><em>тренировку!</em></p>
+            </article>
+            <article class="note note--games">
+              <span class="note__pin" aria-hidden="true"></span>
+              <span class="note__label">В гостиной</span>
+              <p class="note__text">Вечер<br>настольных<br><em>игр</em></p>
+            </article>
+            <a class="note note--new" href="https://rave.dhog.org/viewtopic.php?t=4" target="_blank" rel="noopener noreferrer">
+              <span class="note__tape" aria-hidden="true"></span>
+              <span class="note__label">Новичкам</span>
+              <p class="note__text">Я тут впервые.<br><em>Что мне делать?</em></p>
+              <span class="note__small">Открыть экскурсию ↗</span>
+            </a>
+          </div>
+          <aside class="flyer-slot" id="flyer-slot" aria-label="Пример флаера магазина">
+            <div class="flyer">
+              <span class="flyer__brand" id="flyer-brand">RICH PEACH</span>
+              <strong class="flyer__value" id="flyer-value">10<small>%</small></strong>
+              <span class="flyer__text" id="flyer-text">СКИДКА НА<br>ПЕРВЫЙ ЗАКАЗ</span>
+            </div>
+          </aside>
+        </div>
+      </section>
+    </div>
   </div>
-  <div class="foot">ЕСЛИ ЭТО ВИДНО В СООБЩЕНИИ, ВСТРАИВАНИЕ РАБОТАЕТ</div>
 </main>
+
+<script>
+/* =======================================================
+   НАСТРОЙКИ СОДЕРЖИМОГО — редактируется только этот блок.
+   Даты: ГГГГ-ММ-ДД. Пустая дата "" означает: не назначено.
+   Примеры объявлений и предложения скидки проверяйте перед публикацией.
+   ======================================================= */
+const AYR_DATA = {
+  timezone: 'Europe/Moscow',
+  currentEvent: 'Инвентаризация в чулане',
+
+  // Если сегодня день рождения, вместо отсчета выводится поздравление.
+  birthdays: [
+    // { name: 'Имя Фамилия', day: 5, month: 11 }
+  ],
+  semesterEndDate: '',  // например: '2026-12-20', если это официальная дата
+
+  // Если указана будущая дата церемонии, она заменяет приветствие новичков.
+  ceremonyDate: '',  // например: '2026-11-20', если церемония назначена
+  newcomers: ['Селеста Фэрроу'],
+
+  // Демонстрационные объявления; ссылки вставляйте только если они существуют.
+  notices: [
+    { category:'Сюжет / библиотека', text:'Ищу соигрока для библиотечного сюжета!', url:'' },
+    { category:'Команда / квиддич', text:'Собираем команду на тренировку!', url:'' },
+    { category:'В гостиной', text:'Вечер настольных игр', url:'' },
+    { category:'Новичкам', text:'Я тут впервые. Что мне делать?', url:'https://rave.dhog.org/viewtopic.php?t=4', foot:'Открыть экскурсию ↗' }
+  ],
+
+  // Пример флаера из макета. Поставьте enabled:false, если акция не действует.
+  flyer: {enabled: true, brand:'RICH PEACH', value:'10%', text:'СКИДКА НА ПЕРВЫЙ ЗАКАЗ'}
+};
+/* ================= КОНЕЦ НАСТРОЕК ================== */
+</script>
+<script>
+(() => {
+  'use strict';
+  const cfg = AYR_DATA;
+  const el = (id) => document.getElementById(id);
+  const set = (id, value) => { if (el(id)) el(id).textContent = value; };
+  const dateToday = () => {
+    try {
+      const parts = new Intl.DateTimeFormat('en-CA', {
+        timeZone: cfg.timezone, year:'numeric', month:'2-digit', day:'2-digit'
+      }).formatToParts(new Date());
+      const part = (s) => Number(parts.find(p => p.type === s)?.value);
+      return {y:part('year'), m:part('month'), d:part('day')};
+    } catch(_) {
+      const t = new Date(); return {y:t.getFullYear(),m:t.getMonth()+1,d:t.getDate()};
+    }
+  };
+  const today = dateToday();
+  const readDate = (s) => /^\d{4}-\d{2}-\d{2}$/.test(s||'') ? s.split('-').map(Number) : null;
+  const daysTo = (s) => {
+    const parts=readDate(s); if(!parts) return null;
+    const target=Date.UTC(parts[0],parts[1]-1,parts[2]);
+    const origin=Date.UTC(today.y,today.m-1,today.d);
+    return Math.round((target-origin)/86400000);
+  };
+  const dateLabel = (s) => {
+    const parts=readDate(s); if (!parts) return '';
+    const d = new Date(Date.UTC(parts[0],parts[1]-1,parts[2],12));
+    return new Intl.DateTimeFormat('ru-RU',{day:'numeric',month:'long',timeZone:'UTC'}).format(d);
+  };
+  set('cal-event',cfg.currentEvent || 'Событие уточняется');
+  const birthday = (cfg.birthdays||[]).filter(p=>Number(p.day)===today.d && Number(p.month)===today.m);
+  if(birthday.length) {
+    set('cal-second-label','Сегодня день рождения');
+    const val=el('cal-second-value');
+    if(val) {val.textContent=birthday.map(p=>p.name).join(', ');val.style.fontSize='clamp(17px,2vw,23px)';val.style.lineHeight='1.1';}
+  } else {
+    const days=daysTo(cfg.semesterEndDate);
+    set('cal-second-label','До конца семестра');
+    const val=el('cal-second-value');
+    if(val) {
+      val.textContent='';
+      const num=document.createElement('span'); num.textContent=days===null?'—':String(Math.max(days,0));
+      const unit=document.createElement('small'); unit.textContent=' '+(days===null?'дней':(n=>n%10===1&&n%100!==11?'день':n%10>=2&&n%10<=4&&(n%100<12||n%100>14)?'дня':'дней')(Math.max(days,0)));
+      val.append(num,unit);
+    }
+  }
+  const untilCeremony=daysTo(cfg.ceremonyDate);
+  if(untilCeremony!==null && untilCeremony>=0) {
+    set('cal-third-label','Церемония');
+    set('cal-third-value',dateLabel(cfg.ceremonyDate));
+    set('cal-third-foot',untilCeremony===0?'Сегодня':'До встречи в Башне');
+  } else {
+    set('cal-third-label','Новые птицы');
+    const names=(cfg.newcomers||[]).filter(Boolean);
+    set('cal-third-value',names.length?names.join(', '):'Ждем новых птиц');
+    set('cal-third-foot',names.length?'Добро пожаловать!':'Скоро встретимся');
+  }
+
+  // У всех заметок есть отдельные CSS-стили. Данные сохраняются как текст,
+  // произвольный HTML из объявлений не выполняется.
+  const kinds=['story','quidditch','games','new'];
+  const notes=el('notice-list');
+  if(notes && Array.isArray(cfg.notices)) {
+    notes.textContent='';
+    for(const [i,n] of cfg.notices.slice(0,4).entries()) {
+      if(!n || !n.text) continue;
+      const link=typeof n.url==='string' && /^https:\/\//.test(n.url);
+      const node=document.createElement(link?'a':'article');
+      node.className='note note--'+kinds[i];
+      if(link) {node.href=n.url;node.target='_blank';node.rel='noopener noreferrer';}
+      const pin=document.createElement('span');pin.className=(i===1||i===3)?'note__tape':'note__pin';pin.setAttribute('aria-hidden','true');node.append(pin);
+      const label=document.createElement('span');label.className='note__label';label.textContent=n.category||'';node.append(label);
+      const p=document.createElement('p');p.className='note__text';p.textContent=n.text;node.append(p);
+      if(n.foot) {const foot=document.createElement('span');foot.className='note__small';foot.textContent=n.foot;node.append(foot);}
+      notes.append(node);
+    }
+  }
+  const flyer=cfg.flyer||{};
+  if(el('flyer-slot')) el('flyer-slot').hidden=!flyer.enabled;
+  if(flyer.enabled) {
+    set('flyer-brand',flyer.brand||'');
+    const amount=el('flyer-value');
+    if(amount) amount.textContent=flyer.value||'';
+    set('flyer-text',flyer.text||'');
+  }
+})();
+</script>
 </body>
 </html>
