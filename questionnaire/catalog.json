@@ -1,0 +1,187 @@
+{
+  "format": "raven-anketa-site",
+  "version": 1,
+  "students": {
+    "student-7415c72e1410d4a9": {
+      "name": "Вальра Дракенмар",
+      "files": [
+        "students/student-7415c72e1410d4a9/images/image-1.png",
+        "students/student-7415c72e1410d4a9/index.html"
+      ]
+    },
+    "student-7a0f0a064a78caf2": {
+      "name": "Амилия Лиссаранд",
+      "files": [
+        "students/student-7a0f0a064a78caf2/index.html"
+      ]
+    },
+    "student-35922ee6fbd60ee8": {
+      "name": "Лина Скотт",
+      "files": [
+        "students/student-35922ee6fbd60ee8/images/image-1.jpg",
+        "students/student-35922ee6fbd60ee8/index.html"
+      ]
+    },
+    "student-0f373bd355cec32d": {
+      "name": "Адрианна Сноу",
+      "files": [
+        "students/student-0f373bd355cec32d/images/image-1.jpg",
+        "students/student-0f373bd355cec32d/index.html"
+      ]
+    },
+    "student-41de31f9b7d3dc18": {
+      "name": "Аэлия Фостер",
+      "files": [
+        "students/student-41de31f9b7d3dc18/images/image-1.jpg",
+        "students/student-41de31f9b7d3dc18/index.html"
+      ]
+    },
+    "student-f600bb9c18c00056": {
+      "name": "Мерида Морграфт",
+      "files": [
+        "students/student-f600bb9c18c00056/images/image-1.jpg",
+        "students/student-f600bb9c18c00056/index.html"
+      ]
+    },
+    "student-8cccfdba981e9763": {
+      "name": "Флинн Бейли",
+      "files": [
+        "students/student-8cccfdba981e9763/index.html"
+      ]
+    },
+    "student-a488d0965935efc6": {
+      "name": "Ariane Starling",
+      "files": [
+        "students/student-a488d0965935efc6/images/image-1.jpg",
+        "students/student-a488d0965935efc6/index.html"
+      ]
+    },
+    "student-ba7286bbb945eb3d": {
+      "name": "Эйфа Бирн",
+      "files": [
+        "students/student-ba7286bbb945eb3d/index.html"
+      ]
+    },
+    "student-884ca337a72e9b1a": {
+      "name": "Тиса Паттери",
+      "files": [
+        "students/student-884ca337a72e9b1a/index.html"
+      ]
+    },
+    "student-5652e0a5790731cb": {
+      "name": "Азали Миллер",
+      "files": [
+        "students/student-5652e0a5790731cb/index.html"
+      ]
+    },
+    "student-236539df562955d9": {
+      "name": "Ная Рей",
+      "files": [
+        "students/student-236539df562955d9/index.html"
+      ]
+    },
+    "student-32325c3e18ef50d5": {
+      "name": "Кэтрин Шенай",
+      "files": [
+        "students/student-32325c3e18ef50d5/index.html"
+      ]
+    },
+    "student-0573e9b24958342e": {
+      "name": "Элеонора Флёр",
+      "files": [
+        "students/student-0573e9b24958342e/index.html"
+      ]
+    },
+    "student-cf2889c13c843e47": {
+      "name": "Кэмерин Ствайн",
+      "files": [
+        "students/student-cf2889c13c843e47/index.html"
+      ]
+    },
+    "student-5321f542a786a9a8": {
+      "name": "Люсиль Готвольф",
+      "files": [
+        "students/student-5321f542a786a9a8/index.html"
+      ]
+    },
+    "student-90f049e551c09f08": {
+      "name": "Морен Блекфорд",
+      "files": [
+        "students/student-90f049e551c09f08/images/image-1.jpg",
+        "students/student-90f049e551c09f08/index.html"
+      ]
+    },
+    "student-1e42ba04fec836b3": {
+      "name": "Патриция Роксинбург",
+      "files": [
+        "students/student-1e42ba04fec836b3/index.html"
+      ]
+    },
+    "student-7a238cbe7a62761b": {
+      "name": "Айлин Берг",
+      "files": [
+        "students/student-7a238cbe7a62761b/images/image-1.jpg",
+        "students/student-7a238cbe7a62761b/index.html"
+      ]
+    },
+    "student-d199aa0b9f8234c7": {
+      "name": "Финн Макалистер",
+      "files": [
+        "students/student-d199aa0b9f8234c7/index.html"
+      ]
+    },
+    "student-12b5c890d92659f9": {
+      "name": "Хелена Кейн",
+      "files": [
+        "students/student-12b5c890d92659f9/images/image-1.jpg",
+        "students/student-12b5c890d92659f9/images/image-2.jpg",
+        "students/student-12b5c890d92659f9/images/image-3.png",
+        "students/student-12b5c890d92659f9/index.html"
+      ]
+    },
+    "student-305df39e1c36f9e6": {
+      "name": "Julietta Helwell-de-Kur",
+      "files": [
+        "students/student-305df39e1c36f9e6/images/image-1.jpg",
+        "students/student-305df39e1c36f9e6/images/image-2.jpg",
+        "students/student-305df39e1c36f9e6/index.html"
+      ]
+    }
+  },
+  "shared": [
+    "assets/fonts/RubikVinyl-OFL.txt",
+    "assets/fonts/font-4.ttf",
+    "assets/fonts/font-2.ttf",
+    "assets/fonts/GreatVibes-OFL.txt",
+    "assets/fonts/font-0.ttf",
+    "assets/fonts/Netflix-Bebas-Neue.ttf",
+    "assets/fonts/RubikVinyl-Regular.ttf",
+    "assets/fonts/font-3.ttf",
+    "assets/fonts/Netflix-Bebas-Neue-COPYRIGHT.txt",
+    "assets/fonts/GreatVibes-Regular.ttf",
+    "assets/fonts/font-5.ttf",
+    "assets/fonts/font-1.ttf",
+    "assets/images/crumpled-paper.svg",
+    "assets/images/sorting-hat.png",
+    "assets/images/student-girl.png",
+    "assets/images/syrup.png",
+    "assets/images/quidditch.png",
+    "assets/images/fruit.png",
+    "assets/images/branch.png",
+    "assets/images/door.png",
+    "assets/images/book.png",
+    "assets/images/portrait.png",
+    "assets/images/notes.png",
+    "assets/images/raven.png",
+    "assets/images/student-boy.png",
+    "assets/images/lollipop.png",
+    "assets/images/theatre.png",
+    "assets/images/tea.png",
+    "assets/images/flower.png",
+    "assets/images/meme-placeholder.png",
+    "assets/images/dream-placeholder.png",
+    "assets/css/style.css",
+    "assets/layout.js",
+    "assets/theme.js"
+  ]
+}

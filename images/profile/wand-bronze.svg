@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title">
+  <title id="title">Волшебная палочка</title>
+  <g fill="none" stroke="#dcb178" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M13 48.5 42.5 19a5.7 5.7 0 0 1 8 8L21 56.5a5.7 5.7 0 0 1-8-8Z"/>
+    <path d="m38.5 23 8 8"/>
+  </g>
+  <g fill="#dcb178">
+    <path d="m13 5 2.5 7.5L23 15l-7.5 2.5L13 25l-2.5-7.5L3 15l7.5-2.5L13 5Z"/>
+    <path d="m31 3 1.6 4.4L37 9l-4.4 1.6L31 15l-1.6-4.4L25 9l4.4-1.6L31 3Z"/>
+    <path d="m51 36 2.2 6.8L60 45l-6.8 2.2L51 54l-2.2-6.8L42 45l6.8-2.2L51 36Z"/>
+  </g>
+</svg>

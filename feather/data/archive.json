@@ -1,7 +1,250 @@
 {
   "version": 2,
-  "exported": "2026-09-30T21:42:42.982Z",
+  "exported": "2026-10-25T09:16:48.873Z",
   "archive": [
+    {
+      "type": "weekly",
+      "season": "Осень 2026",
+      "dates": "26.10 — 01.11",
+      "saved_at": "2026-10-25T09:16:48.866Z",
+      "issue_num": "13",
+      "points": "164",
+      "points_total": "539",
+      "points_note": "Элоди Вокер [269 баллов]\nТеа Старлайт [91 баллов]\nЭсмеральда Гюго [70 баллов]",
+      "position": "4",
+      "quill_num": "",
+      "quill_theme": "",
+      "quill_text": "",
+      "students_list": [],
+      "events_list": [
+        {
+          "text": "Индивидуальные расписания",
+          "url": "https://dhog.org/schedule",
+          "linkText": "Индивидуальные расписания"
+        },
+        {
+          "text": "И всё ещё (и ещё три два месяца): ВШТ",
+          "url": "https://dhog.org/viewforum.php?f=159",
+          "linkText": "ВШТ"
+        },
+        {
+          "text": "Новые кабинеты: Магическая кулинария",
+          "url": "https://dhog.org/cabinets/cooking",
+          "linkText": "магическая кулинария"
+        },
+        {
+          "text": "Новые кабинеты: Магия камней",
+          "url": "https://dhog.org/cabinets/magic-stones",
+          "linkText": "Магия камней"
+        },
+        {
+          "text": "Церемония распределения: 1 ноября (воскресенье) 18:30",
+          "url": "https://dhog.org/viewtopic.php?p=185428#p185428",
+          "linkText": "1 ноября (воскресенье) 18:30"
+        },
+        {
+          "text": "Осенняя ярмарка в Хогсмиде",
+          "url": "https://hogsmeade.dhog.org/viewforum.php?f=213",
+          "linkText": "Осенняя ярмарка"
+        },
+        {
+          "text": "Тыквовин: Всадник Тыквовина снова у нас в краях!",
+          "url": "https://dhog.org/viewforum.php?f=162",
+          "linkText": "Тыквовин"
+        }
+      ],
+      "news_list": [
+        {
+          "text": "INCTOBER в самом разгаре!",
+          "url": "https://dhog.org/viewtopic.php?p=184501#p184501",
+          "linkText": "INCTOBER"
+        },
+        {
+          "text": "Инвентаризация 2.0 в Чулане: новые карточки, новые подарки, но по-прежнему весело!",
+          "url": "https://rave.dhog.org/viewtopic.php?p=41525#p41525",
+          "linkText": "Инвентаризация 2.0"
+        }
+      ],
+      "arrow": true,
+      "bds": [],
+      "studentsVisible": false,
+      "bdVisible": false,
+      "quillVisible": false
+    },
+    {
+      "type": "weekly",
+      "season": "Осень 2026",
+      "dates": "19.10 — 25.10",
+      "saved_at": "2026-10-25T08:59:59.662Z",
+      "issue_num": "12",
+      "points": "164",
+      "points_total": "539",
+      "points_note": "Элоди Вокер [269 баллов]\nТеа Старлайт [91 баллов]\nЭсмеральда Гюго [70 баллов]",
+      "position": "4",
+      "quill_num": "",
+      "quill_theme": "",
+      "quill_text": "",
+      "students_list": [],
+      "events_list": [
+        {
+          "text": "Индивидуальные расписания",
+          "url": "https://dhog.org/schedule",
+          "linkText": "Индивидуальные расписания"
+        },
+        {
+          "text": "И всё ещё (и ещё три два месяца): ВШТ",
+          "url": "https://dhog.org/viewforum.php?f=159",
+          "linkText": "ВШТ"
+        }
+      ],
+      "news_list": [
+        {
+          "text": "Инвентаризация 2.0 в Чулане: новые карточки, новые подарки, но по-прежнему весело!",
+          "url": "https://rave.dhog.org/viewtopic.php?p=41525#p41525",
+          "linkText": "Инвентаризация 2.0"
+        },
+        {
+          "text": "INCTOBER в самом разгаре!",
+          "url": "https://dhog.org/viewtopic.php?p=184501#p184501",
+          "linkText": "INCTOBER"
+        }
+      ],
+      "arrow": true,
+      "bds": [],
+      "studentsVisible": false,
+      "bdVisible": false,
+      "quillVisible": false
+    },
+    {
+      "type": "weekly",
+      "season": "Осень 2026",
+      "dates": "12.10 — 18.10",
+      "saved_at": "2026-10-15T21:00:12.938Z",
+      "issue_num": "11",
+      "points": "156",
+      "points_total": "375",
+      "points_note": "Лучшие студенты факультета:\nЭлоди Вокер [117 баллов]\nТеа Старлайт [91 балл]\nЭсмеральда Гюго [70 баллов]",
+      "position": "4",
+      "quill_num": "",
+      "quill_theme": "",
+      "quill_text": "",
+      "students_list": [
+        {
+          "name": "Теа Старлайт",
+          "photo": "./img/uploads/2026/10/1792097873722-.png"
+        },
+        {
+          "name": "Артемисия Крум",
+          "photo": "./img/uploads/2026/10/1792097897859-.jpg"
+        }
+      ],
+      "events_list": [
+        {
+          "text": "Индивидуальные расписания",
+          "url": "https://dhog.org/schedule",
+          "linkText": "Индивидуальные расписания"
+        },
+        "День Гриффиндора подошёл к концу, ждём итогов!",
+        "Церемония распределения 14 октября",
+        {
+          "text": "Открытие кабинета Магической дипломатии",
+          "url": "https://dhog.org/cabinets/diplomacy",
+          "linkText": "Магической дипломатии"
+        },
+        {
+          "text": "И всё ещё (и ещё три два месяца): ВШТ",
+          "url": "https://dhog.org/viewforum.php?f=159",
+          "linkText": "ВШТ"
+        }
+      ],
+      "news_list": [
+        {
+          "text": "INCTOBER в самом разгаре!",
+          "url": "https://dhog.org/viewtopic.php?p=184501#p184501",
+          "linkText": "INCTOBER"
+        },
+        {
+          "text": "Турнир Фруктокога подходит к концу, но Фруктовые бои не заканчиваются!",
+          "url": "https://raven-hd.github.io/fruitkog-battle/",
+          "linkText": "Фруктокога"
+        },
+        {
+          "text": "Инвентаризация 2.0 в Чулане: новые карточки, новые подарки, но по-прежнему весело!",
+          "url": "https://rave.dhog.org/viewtopic.php?p=41525#p41525",
+          "linkText": "Инвентаризация 2.0"
+        }
+      ],
+      "arrow": false,
+      "bds": [
+        {
+          "name": "Септима Аллен",
+          "date": "16 октября",
+          "photo": "./img/uploads/2026/10/1791925493217-.png"
+        }
+      ],
+      "studentsVisible": true,
+      "bdVisible": true,
+      "quillVisible": false
+    },
+    {
+      "type": "weekly",
+      "season": "Осень 2026",
+      "dates": "05.10 — 11.10",
+      "saved_at": "2026-10-05T21:43:25.252Z",
+      "issue_num": "10",
+      "points": "8",
+      "points_total": "219",
+      "points_note": "Лучшие студенты Факультета:\nЭлоди Вокер [117 баллов]\nЭсмеральда Гюго [30 баллов]\nМария Торнаги [14 баллов]",
+      "position": "4",
+      "quill_num": "",
+      "quill_theme": "",
+      "quill_text": "",
+      "students_list": [],
+      "events_list": [
+        {
+          "text": "День Гриффиндора",
+          "url": "https://dhog.org/viewtopic.php?t=6345",
+          "linkText": "День Гриффиндора"
+        },
+        "Распределенение: 14 октября 18:30",
+        {
+          "text": "Девятидневное путешествие в Нумерологию - приём отчётов до 9го октября",
+          "url": "https://dhog.org/viewtopic.php?t=6322",
+          "linkText": "Девятидневное путешествие в Нумирологию"
+        },
+        {
+          "text": "I Тур ВШТ: бинго участников",
+          "url": "https://dhog.org/viewtopic.php?t=6355",
+          "linkText": "бинго участников"
+        },
+        "ВШТ: Конкурс и бинго для болельщеков",
+        {
+          "text": "Индивидуальные расписания",
+          "url": "https://dhog.org/viewtopic.php?t=6356",
+          "linkText": "Индивидуальные расписания"
+        }
+      ],
+      "news_list": [
+        {
+          "text": "INCTOBER стартовал, творите, орлы, творите!",
+          "url": "https://rave.dhog.org/viewtopic.php?t=1673",
+          "linkText": "INCTOBER"
+        },
+        "Начинаются пробы на роли в Театре Ровены по всем вопросам писать Grace Diamond-de-Kur (dis: gracie_dk)",
+        "Совсем скоро нас ждёт новый этап инвентаризации в Чулане, не пропустите!",
+        "И так же совсем скоро некоторые из своих секретов откроет Леденцовая комната.",
+        {
+          "text": "Продолжаются Фруктовые бои - на носу второй тур турнира, но вы можете развлекаться и вне турнирной таблицы.",
+          "url": "https://raven-hd.github.io/fruitkog-battle/",
+          "linkText": "Фруктовые бои"
+        }
+      ],
+      "arrow": false,
+      "bds": [],
+      "studentsVisible": false,
+      "bdVisible": false,
+      "quillVisible": false
+    },
     {
       "type": "weekly",
       "season": "Осень 2026",
